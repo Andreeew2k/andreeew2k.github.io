@@ -34,17 +34,13 @@ body {
   color: white;
 }
 
-.desktop {
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 20px;
-}
+
 
 .icon {
   width: 80px;
   text-align: center;
 }
+
 
 .icon img {
   width: 64px;
@@ -64,21 +60,35 @@ body {
 /* =========================
    Notepad Window
    ========================= */
+.desktop {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  height: calc(100vh - 40px);
+  gap: 20px;
+  z-index: 1; /* 👈 Always below windows */
+}
+
 .window {
   position: absolute;
   top: 300px;
   left: 300px;
-  width: 500p;
-  height: 550px;
+  width: 650px;
+  height: 700px;
   border: 2px solid #000080;
   background: #fff;
-  display: none; /* hidden by default */
+  display: none;
   resize: both;
   overflow: hidden;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
-  z-index: 1000;
+  z-index: 100; /* 👈 Start above icons */
   font-family: "Courier New", monospace;
 }
+
 
 /* Title bar container */
 .title-bar {
@@ -137,7 +147,7 @@ body {
   margin: 0;
   white-space: pre-wrap;
   font-family: "Courier New", monospace;
-  font-size: 14px;
+  font-size: 18px;
 }
 
 /* Image viewer window */
@@ -261,7 +271,7 @@ body {
   display: flex;
   flex-direction: column; /* stack vertically like desktop */
   gap: 40px;              /* match .desktop gap */
-  z-index: 1000;
+  z-index: 50;
 }
 
 .games-bar .icon {
@@ -283,4 +293,55 @@ body {
   margin-top: 5px;
   font-size: 14px;
   color: white;
+}
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.title-buttons button {
+  width: 24px;
+  height: 20px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.close-btn {
+  background: #c00;
+  color: white;
+}
+.close-btn:hover { background: #f00; }
+
+.max-btn {
+  background: #008;
+  color: white;
+}
+.max-btn:hover { background: #00f; }
+
+.selection-box {
+  position: absolute;
+  border: 1px solid #3399ff;
+  background: rgba(51, 153, 255, 0.3);
+  pointer-events: none; /* so it doesn’t block clicks */
+  display: none;
+  z-index: 9999;
+}
+
+/* Prevent selecting text and dragging images */
+body, .desktop, .icon, img, span {
+  user-select: none;          /* No text/image highlight */
+  -webkit-user-drag: none;    /* No dragging images */
+}
+/* Allow selecting and copying inside Notepad windows */
+.notepad-content, 
+.notepad-content pre {
+  user-select: text !important;
 }

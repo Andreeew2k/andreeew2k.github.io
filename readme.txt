@@ -36,18 +36,18 @@ my first steps into the world of computers & science.
 Behind these icons you’ll find the goods:
 
 ----------------------------------------------------
- FORMAL FILES
+ FORMAL FILES - ON THE LEFT
 ----------------------------------------------------
 - Resume .......... Opens a PDF with my current CV
-- Projects ........ *Check Back Soon*
 - Publication ..... Links to my research paper
+- Projects ........ *Check Back Soon*
 
 ----------------------------------------------------
- INFORMAL FILES
+ INFORMAL FILES - ON THE RIGHT
 ----------------------------------------------------
 - README .......... Opens this README.txt file
 - Images .......... Film shots from my camera archive
-- Games ........... A nostalgic list of childhood faves
+- Steam ........... My account with all classic stuff
 - Personal ........ *Check Back Soon*
 
 ----------------------------------------------------

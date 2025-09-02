@@ -1,67 +1,64 @@
-const icons = document.querySelectorAll('.icon[data-file]');
-const windowEl = document.getElementById('readme-window');
-const titleBar = document.getElementById('title-bar');
-const windowTitle = document.getElementById('window-title');
-const contentEl = document.getElementById('readme-text');
-const closeBtn = document.getElementById('close-btn');
+// notepad.js
+document.addEventListener("DOMContentLoaded", () => {
+  const tpl = document.getElementById("notepad-template");
 
-// Open Notepad when icon clicked
-icons.forEach(icon => {
-  icon.addEventListener('dblclick', () => {
-    const file = icon.getAttribute('data-file');
-    windowTitle.textContent = `${file} - Notepad`;
-    contentEl.textContent = "Loading...";
+  function makeDraggable(win) {
+    const titleBar = win.querySelector(".title-bar");
+    let isDragging = false, offsetX = 0, offsetY = 0;
 
+    titleBar.addEventListener("mousedown", e => {
+      isDragging = true;
+      offsetX = e.clientX - win.offsetLeft;
+      offsetY = e.clientY - win.offsetTop;
+      if (window.bringToFront) window.bringToFront(win);
+    });
+
+    document.addEventListener("mousemove", e => {
+      if (!isDragging) return;
+      let newLeft = e.clientX - offsetX;
+      let newTop = e.clientY - offsetY;
+      newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - win.offsetWidth));
+      newTop = Math.max(0, Math.min(newTop, window.innerHeight - win.offsetHeight));
+      win.style.left = `${newLeft}px`;
+      win.style.top = `${newTop}px`;
+    });
+
+    document.addEventListener("mouseup", () => isDragging = false);
+  }
+
+  function openNotepad(file) {
+    const win = tpl.content.firstElementChild.cloneNode(true);
+    win.style.display = "block";
+    win.style.top = Math.random() * 200 + "px";
+    win.style.left = Math.random() * 200 + "px";
+
+    win.querySelector(".close-btn").addEventListener("click", () => {
+      SoundFX.click();  // 👈 add this line
+      win.remove();
+    });
+
+    const pre = win.querySelector("pre");
+    pre.textContent = "Loading...";
     fetch(file)
       .then(res => res.text())
-      .then(text => contentEl.textContent = text)
-      .catch(() => contentEl.textContent = "Error loading file.");
+      .then(txt => pre.textContent = txt)
+      .catch(() => pre.textContent = "Error loading file.");
 
-    windowEl.style.display = 'block';
-  });
-});
-
-// Close button
-closeBtn.addEventListener('click', () => {
-  windowEl.style.display = 'none';
-});
-
-// Dragging
-let isDragging = false, offsetX = 0, offsetY = 0;
-titleBar.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  offsetX = e.clientX - windowEl.offsetLeft;
-  offsetY = e.clientY - windowEl.offsetTop;
-});
-document.addEventListener('mousemove', (e) => {
-  if (isDragging) {
-    let newLeft = e.clientX - offsetX;
-    let newTop = e.clientY - offsetY;
-
-    // clamp to window bounds
-    const maxLeft = window.innerWidth - windowEl.offsetWidth;
-    const maxTop = window.innerHeight - windowEl.offsetHeight;
-
-    newLeft = Math.max(0, Math.min(newLeft, maxLeft));
-    newTop = Math.max(0, Math.min(newTop, maxTop));
-
-    windowEl.style.left = newLeft + 'px';
-    windowEl.style.top = newTop + 'px';
+    makeDraggable(win);
+    document.body.appendChild(win);
+    if (window.bringToFront) window.bringToFront(win);
   }
-});
 
-document.addEventListener('mouseup', () => isDragging = false);
+  document.querySelectorAll('.icon[data-file]').forEach(icon => {
+    icon.addEventListener("dblclick", () => {
+      const file = icon.dataset.file;
+      if (file && file.endsWith(".txt")) {
+        SoundFX.click();  // 👈 add this line
+        openNotepad(file);
+      }
+    });
+  });
 
-// Auto-open README on page load
-window.addEventListener("load", () => {
-  const firstFile = "readme.txt"; // adjust if different
-  windowTitle.textContent = `${firstFile} - Notepad`;
-  contentEl.textContent = "Loading...";
-
-  fetch(firstFile)
-    .then(res => res.text())
-    .then(text => contentEl.textContent = text)
-    .catch(() => contentEl.textContent = "Error loading file.");
-
-  windowEl.style.display = "block";
+  // Auto-open README.txt
+  openNotepad("readme.txt");
 });
