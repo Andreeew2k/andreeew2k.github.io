@@ -1,0 +1,286 @@
+
+/* Startup screen */
+.startup {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999; /* make sure it's on top */
+}
+
+.startup img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.startup.fade-out {
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+
+/* =========================
+   Desktop
+   ========================= */
+
+body {
+  margin: 0;
+  height: 100vh;
+  background: url("backgrounds/wallpaper.jpg") no-repeat center center fixed;
+  background-size: cover;
+  font-family: "Tahoma", sans-serif;
+  color: white;
+}
+
+.desktop {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 20px;
+}
+
+.icon {
+  width: 80px;
+  text-align: center;
+}
+
+.icon img {
+  width: 64px;
+  height: 64px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+}
+
+.icon span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: white;
+}
+
+/* =========================
+   Notepad Window
+   ========================= */
+.window {
+  position: absolute;
+  top: 300px;
+  left: 300px;
+  width: 500p;
+  height: 550px;
+  border: 2px solid #000080;
+  background: #fff;
+  display: none; /* hidden by default */
+  resize: both;
+  overflow: hidden;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  z-index: 1000;
+  font-family: "Courier New", monospace;
+}
+
+/* Title bar container */
+.title-bar {
+  background: linear-gradient(#245edb, #1040a0);
+  color: white;
+  padding: 4px 8px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  user-select: none;
+  white-space: nowrap;   /* keep one line */
+  overflow: hidden;      /* prevent overflow */
+}
+
+/* Title text inside */
+.title-bar span {
+  flex: 1;               /* take remaining space */
+  overflow: hidden;      /* hide extra text */
+  text-overflow: ellipsis; /* show "..." */
+}
+
+
+.close-btn {
+  background: #c00;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.close-btn:hover { background: #f00; }
+
+.menu-bar {
+  background: #ece9d8;
+  color: #000;
+  padding: 2px 8px;
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+  display: flex;
+  gap: 15px;
+}
+
+.notepad-content {
+  padding: 4px;
+  height: calc(100% - 52px); /* minus title + menu */
+  overflow: auto;
+  background: #fff;
+  color: #000;
+}
+
+.notepad-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-family: "Courier New", monospace;
+  font-size: 14px;
+}
+
+/* Image viewer window */
+/* Image window */
+.image-window {
+  position: absolute;
+  top: 120px;
+  left: 120px;
+  width: 800px;
+  height: 600px;
+  min-width: 400px;    /* 👈 keeps buttons from crunching */
+  min-height: 300px;
+  display: none;
+  background: #fff;
+  border: 2px solid #000080;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  resize: both;
+  overflow: hidden;    /* 👈 hides scrollbars by default */
+  z-index: 20;
+}
+
+/* Image area */
+.image-content {
+  background: #fff;
+  height: calc(100% - 80px); /* title + toolbar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;    /* 👈 no scrollbars unless zoom forces it */
+}
+
+.image-content img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* Toolbar */
+.image-toolbar {
+  background: #ece9d8;
+  border-top: 1px solid #aaa;
+  display: flex;
+  justify-content: center;
+  gap: 20px;         /* 👈 keeps "grid" spacing */
+  padding: 6px;
+}
+
+.image-toolbar button {
+  border: none;         /* 👈 no border */
+  background: none;     /* 👈 no square background */
+  width: 32px;          /* 👈 keeps button grid size */
+  height: 32px;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-toolbar button img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+.image-toolbar button:hover {
+  background: rgba(0,0,0,0.1); /* 👈 optional faint hover */
+  border-radius: 4px;
+}
+
+
+.image-window {
+  width: 800px;
+  height: 600px;
+  display: none;
+  background: #fff;
+  border: 2px solid #000080;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  resize: both;
+  overflow: hidden;
+}
+
+.image-content {
+  background: #fff;
+  height: calc(100% - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.image-content img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.image-toolbar {
+  background: #ece9d8;
+  border-top: 1px solid #aaa;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 6px;
+}
+
+.image-toolbar button {
+  border: 1px solid #999;
+  background: #f8f8f8;
+  padding: 4px 12px;
+  cursor: pointer;
+}
+
+.image-toolbar button:hover {
+  background: #e0e0e0;
+}
+/* Games bar (right side, stacked like desktop icons) */
+.games-bar {
+  position: fixed;
+  top: 20px;              /* same offset as .desktop padding */
+  right: 20px;            /* keep on the right side */
+  display: flex;
+  flex-direction: column; /* stack vertically like desktop */
+  gap: 40px;              /* match .desktop gap */
+  z-index: 1000;
+}
+
+.games-bar .icon {
+  width: 80px;            /* same as desktop icons */
+  text-align: center;
+}
+
+.games-bar .icon img {
+  width: 64px;            /* same size as desktop */
+  height: 64px;
+  cursor: pointer;
+  display: block;
+  margin: 0 auto;
+  transition: transform 0.2s ease;
+}
+
+.games-bar .icon span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+  color: white;
+}

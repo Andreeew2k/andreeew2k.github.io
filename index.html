@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Andrii Lenyshyn HCI | UX
+  </title>
+  <link rel="stylesheet" href="xp.css">
+</head>
+<body>
+  <div class="desktop" id="desktop">
+    <!-- README icon -->
+    <div class="icon" data-file="readme.txt">
+      <img src="icons/README.png" alt="README">
+      <span>README.txt</span>
+    </div>
+
+  <div class="icon">
+    <a href="other\Andrii_Lenyshyn_Resume_2025.pdf" target="_blank">
+      <img src="icons/word.png" alt="Resume">
+      <span>Resume</span>
+    </a>
+  </div>
+
+  <!-- <div class="icon">
+    <a href="link-to-projects.pdf" target="_blank">
+      <img src="icons/folder_files.png" alt="Projects">
+      <span>Projects</span>
+    </a>
+  </div> -->
+
+  <div class="icon">
+    <a href="https://dl.acm.org/doi/10.1145/3665463.3678808" target="_blank">
+      <img src="icons/folder_star.png" alt="Publication">
+      <span>Publication</span>
+    </a>
+  </div>
+
+
+
+
+    <!-- Images icon -->
+    <div class="icon" id="images-icon">
+      <a href="https://store.steampowered.com/app/2990/FlatOut_2/" target="_blank"></a>
+      <img src="icons/folder_images.png" alt="Images">
+      <span>Images</span>
+    </div>
+  </div>
+
+  <div class="games-bar" id="games-bar">
+    <div class="icon">
+      <a href="https://store.steampowered.com/app/2990/FlatOut_2/" target="_blank">
+        <img src="icons/fo2.png" alt="FO2">
+        <span>FlatOut2</span>
+      </a>
+    </div>
+    <div class="icon">
+      <a href="https://store.steampowered.com/app/220/HalfLife_2/" target="_blank">
+        <img src="icons/Half_life_2.png" alt="HL2">
+        <span>HL2</span>
+
+      </a>
+    </div>
+    <div class="icon">
+      <a href="https://store.steampowered.com/app/12120/Grand_Theft_Auto_San_Andreas/" target="_blank">
+        <img src="icons/Grand_Theft_Auto_San_Andreas_logo.png" alt="GTA: SA">
+        <span>GTA: SA</span>
+      </a>
+    </div>
+    <div class="icon">
+      <a href="https://store.steampowered.com/app/12120/Grand_Theft_Auto_San_Andreas/" target="_blank">
+        <img src="icons/Serious_Sam_logo.png" alt="Serious Sam">
+        <span>Serious Sam</span>
+      </a>
+    </div>
+    <div class="icon">
+      <a href="https://www.amazon.ca/Need-for-Speed-Most-Wanted/dp/B000COCAJI" target="_blank">
+        <img src="icons/nfsmw.png" alt="NFSMW">
+        <span>Need For Speed</span>
+      </a>
+    </div>
+    <div class="icon">
+      <a href="https://store.steampowered.com/app/10/CounterStrike/" target="_blank">
+        <img src="icons/counter_strike_1.6.png" alt="CS16">
+        <span>Counter-Strike 1.6</span>
+      </a>
+    </div>    
+
+  </div>
+  <!-- Notepad window -->
+  <div class="window" id="readme-window">
+    <div class="title-bar" id="title-bar">
+      <span id="window-title">Untitled - Notepad</span>
+      <button class="close-btn" id="close-btn">X</button>
+    </div>
+    
+    <div class="menu-bar">
+      <span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span>
+    </div>
+    <div class="notepad-content">
+      <pre id="readme-text">Loading...</pre>
+    </div>
+  </div>
+
+  <!-- Windows Picture and Fax Viewer -->
+  <div class="window image-window" id="image-window">
+    <div class="title-bar" id="image-titlebar">
+      <span id="image-title">Image Viewer - Windows XP</span>
+      <button class="close-btn" id="image-close">X</button>
+    </div>
+
+    <!-- Image area -->
+    <div class="image-content">
+      <img src="" alt="Viewer" id="viewer-img">
+    </div>
+
+    <!-- Toolbar -->
+    <div class="image-toolbar">
+      <button id="prev-btn"><img src="icons/prev.png" alt="Prev"></button>
+      <button id="next-btn"><img src="icons/next.png" alt="Next"></button>
+      <button id="rotate-left"><img src="icons/rotate-left.png" alt="Rotate Left"></button>
+      <button id="rotate-right"><img src="icons/rotate-right.png" alt="Rotate Right"></button>
+      <button id="zoom-in"><img src="icons/zoom-in.png" alt="Zoom In"></button>
+      <button id="zoom-out"><img src="icons/zoom-out.png" alt="Zoom Out"></button>
+      <button id="slideshow"><img src="icons/slideshow.png" alt="Slideshow"></button>
+      <!-- <button id="delete"><img src="icons/delete.png" alt="Delete"></button> -->
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="startup.js"></script>
+  <script src="notepad.js"></script>
+  <script src="imageviewer.js"></script>
+  <script src="window-manager.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  function bringToFront(win) {
+    // find the highest z-index currently in use
+    let maxZ = 0;
+    document.querySelectorAll('.window').forEach(w => {
+      const z = parseInt(window.getComputedStyle(w).zIndex) || 0;
+      if (z > maxZ) maxZ = z;
+    });
+    win.style.zIndex = maxZ + 1; // put clicked window on top
+  }
+
+  // whenever any .window (Notepad, Image Viewer, etc.) is clicked
+  document.addEventListener('mousedown', (e) => {
+    const win = e.target.closest('.window');
+    if (win) bringToFront(win);
+  });
+});
+</script>
+
+  
+</body>
+</html>
