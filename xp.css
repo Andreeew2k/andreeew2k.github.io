@@ -346,3 +346,8 @@ body, .desktop, .icon, img, span {
 .notepad-content pre {
   user-select: text !important;
 }
+html, body {
+  height: 100%;
+  overflow: hidden;   /* 🚫 disables scrollbars */
+  touch-action: none; /* 🚫 disables touch scrolling/panning */
+}

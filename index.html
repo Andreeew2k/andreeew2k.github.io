@@ -113,6 +113,13 @@
     <script src="notepad.js"></script>
     <script src="imageviewer.js"></script>
     <script src="music.js"></script>
+    <script>
+      // Prevent touch scrolling / bounce on mobile
+      document.addEventListener('touchmove', function (e) {
+        e.preventDefault();
+      }, { passive: false });
+    </script>
+
 
 </body>
 </html>
