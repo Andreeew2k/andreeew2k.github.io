@@ -34,14 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.appendChild(win);
 
     // Calculate safe position (within viewport, right half only)
-    const winWidth = win.offsetWidth || 500;  // fallback
+    const winWidth = win.offsetWidth || 500;
     const winHeight = win.offsetHeight || 400;
-
-    // define horizontal bounds
-    const minLeft = Math.floor(window.innerWidth * 0.5); // 50% of screen
-    const maxLeft = Math.max(minLeft, window.innerWidth - winWidth - 20); // keep 20px margin
-
-    // define vertical bounds
+    const minLeft = Math.floor(window.innerWidth * 0.5);
+    const maxLeft = Math.max(minLeft, window.innerWidth - winWidth - 20);
     const minTop = 0;
     const maxTop = Math.max(0, window.innerHeight - winHeight - 20);
 
@@ -50,7 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     win.style.left = left + "px";
     win.style.top = top + "px";
-
 
     if (window.bringToFront) window.bringToFront(win);
 
@@ -66,38 +61,39 @@ document.addEventListener("DOMContentLoaded", () => {
       img.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
     }
 
+    // Toolbar buttons with sounds
     win.querySelector(".close-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       win.remove();
     });
     win.querySelector(".prev-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       rotation = 0; zoom = 1; showImage(currentIndex);
     });
     win.querySelector(".next-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       currentIndex = (currentIndex + 1) % images.length;
       rotation = 0; zoom = 1; showImage(currentIndex);
     });
     win.querySelector(".rotate-left").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       rotation -= 90; showImage(currentIndex);
     });
     win.querySelector(".rotate-right").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       rotation += 90; showImage(currentIndex);
     });
     win.querySelector(".zoom-in").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       zoom += 0.1; showImage(currentIndex);
     });
     win.querySelector(".zoom-out").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       zoom = Math.max(0.1, zoom - 0.1); showImage(currentIndex);
     });
     win.querySelector(".slideshow").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.click();
       setInterval(() => {
         currentIndex = (currentIndex + 1) % images.length;
         rotation = 0; zoom = 1;
@@ -108,12 +104,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (images.length) showImage(currentIndex);
 
     makeDraggable(win);
-    document.body.appendChild(win);
     if (window.bringToFront) window.bringToFront(win);
   }
 
+  // Mobile detection
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Icon open
   document.getElementById("images-icon").addEventListener("dblclick", () => {
-    SoundFX.click();  // 👈 add this line
+    if (window.SoundFX) SoundFX.click();
     fetch("images.json")
       .then(res => res.json())
       .then(data => {
@@ -121,12 +122,14 @@ document.addEventListener("DOMContentLoaded", () => {
         openImageViewer(shuffled);
       });
   });
-  
-  fetch("images.json")
-  .then(res => res.json())
-  .then(data => {
-    const shuffled = data.sort(() => Math.random() - 0.5);
-    openImageViewer(shuffled);
-  });
 
+  // Auto-open images ONLY on desktop
+  if (!isMobile()) {
+    fetch("images.json")
+      .then(res => res.json())
+      .then(data => {
+        const shuffled = data.sort(() => Math.random() - 0.5);
+        openImageViewer(shuffled);
+      });
+  }
 });
