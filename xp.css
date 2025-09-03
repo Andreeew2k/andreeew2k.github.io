@@ -27,13 +27,14 @@
 
 body {
   margin: 0;
-  height: 100vh;
-  background: url("backgrounds/wallpaper.jpg") no-repeat center center fixed;
+  min-height: 100vh;
+  background: url("backgrounds/wallpaper.jpg") no-repeat center center;
   background-size: cover;
+  background-attachment: fixed;
   font-family: "Tahoma", sans-serif;
   color: white;
+  overflow: hidden; /* 👈 prevents scrolling */
 }
-
 
 
 .icon {

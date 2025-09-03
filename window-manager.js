@@ -9,15 +9,14 @@ document.addEventListener("DOMContentLoaded", () => {
     win.style.zIndex = maxZ + 1;
   }
 
-  window.bringToFront = bringToFront; // expose globally
+  window.bringToFront = bringToFront;
 
-  // Bring to front when clicking inside a window
   document.addEventListener("mousedown", e => {
     const win = e.target.closest(".window");
     if (win) bringToFront(win);
   });
 
-  // Desktop selection box
+  // Selection box
   const selectionBox = document.getElementById("selection-box");
   let startX, startY, isSelecting = false;
 
@@ -48,21 +47,35 @@ document.addEventListener("DOMContentLoaded", () => {
     selectionBox.style.height = `${h}px`;
   });
 
-document.addEventListener("mouseup", () => {
-  if (isSelecting) {
-    isSelecting = false;
-    selectionBox.style.display = "none";
-  }
-});
-
-// Generic desktop icon handler (for links)
-document.querySelectorAll('.icon[data-link]').forEach(icon => {
-  icon.addEventListener("dblclick", () => {
-    const url = icon.dataset.link;
-    if (url) {
-      SoundFX.click();  // 👈 add this line
-      window.open(url, "_blank");
+  document.addEventListener("mouseup", () => {
+    if (isSelecting) {
+      isSelecting = false;
+      selectionBox.style.display = "none";
     }
   });
-});
+
+  // Helper: detect mobile
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Handle link icons
+  document.querySelectorAll('.icon[data-link]').forEach(icon => {
+    const handler = () => {
+      const url = icon.dataset.link;
+      if (url) {
+        if (window.SoundFX) {
+          SoundFX.open();
+          SoundFX.click();
+        }
+        window.open(url, "_blank");
+      }
+    };
+
+    if (isMobile()) {
+      icon.addEventListener("click", handler);
+    } else {
+      icon.addEventListener("dblclick", handler);
+    }
+  });
 });

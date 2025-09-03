@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
 
-    // Draw bars
     function draw() {
       requestAnimationFrame(draw);
       analyser.getByteFrequencyData(dataArray);
@@ -65,9 +64,23 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Attach safely
-  musicIcon.addEventListener("dblclick", () => {
-    if (window.SoundFX) SoundFX.open?.();
+  // Helper: detect mobile
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Attach handler
+  const handler = () => {
+    if (window.SoundFX) {
+      SoundFX.open();
+      SoundFX.click();
+    }
     openMusicPlayer();
-  });
+  };
+
+  if (isMobile()) {
+    musicIcon.addEventListener("click", handler);   // one tap on mobile
+  } else {
+    musicIcon.addEventListener("dblclick", handler); // double click on desktop
+  }
 });

@@ -1,132 +1,86 @@
-// imageviewer.js
+// music.js
 document.addEventListener("DOMContentLoaded", () => {
-  const tpl = document.getElementById("imageviewer-template");
+  const tpl = document.getElementById("music-template");
+  const musicIcon = document.getElementById("music-icon");
 
-  function makeDraggable(win) {
-    const titleBar = win.querySelector(".title-bar");
-    let isDragging = false, offsetX = 0, offsetY = 0;
-
-    titleBar.addEventListener("mousedown", e => {
-      isDragging = true;
-      offsetX = e.clientX - win.offsetLeft;
-      offsetY = e.clientY - win.offsetTop;
-      if (window.bringToFront) window.bringToFront(win);
-    });
-
-    document.addEventListener("mousemove", e => {
-      if (!isDragging) return;
-      let newLeft = e.clientX - offsetX;
-      let newTop = e.clientY - offsetY;
-      newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - win.offsetWidth));
-      newTop = Math.max(0, Math.min(newTop, window.innerHeight - win.offsetHeight));
-      win.style.left = `${newLeft}px`;
-      win.style.top = `${newTop}px`;
-    });
-
-    document.addEventListener("mouseup", () => isDragging = false);
+  if (!tpl) {
+    console.error("Music template not found");
+    return;
+  }
+  if (!musicIcon) {
+    console.error("Music icon not found");
+    return;
   }
 
-  function openImageViewer(images = []) {
+  function openMusicPlayer() {
     const win = tpl.content.firstElementChild.cloneNode(true);
-    win.style.display = "block";
-
-    // Append first so offsetWidth/offsetHeight are measurable
     document.body.appendChild(win);
-
-    // Calculate safe position (within viewport, right half only)
-    const winWidth = win.offsetWidth || 500;  // fallback
-    const winHeight = win.offsetHeight || 400;
-
-    // define horizontal bounds
-    const minLeft = Math.floor(window.innerWidth * 0.5); // 50% of screen
-    const maxLeft = Math.max(minLeft, window.innerWidth - winWidth - 20); // keep 20px margin
-
-    // define vertical bounds
-    const minTop = 0;
-    const maxTop = Math.max(0, window.innerHeight - winHeight - 20);
-
-    const left = Math.floor(Math.random() * (maxLeft - minLeft + 1) + minLeft);
-    const top = Math.floor(Math.random() * (maxTop - minTop + 1) + minTop);
-
-    win.style.left = left + "px";
-    win.style.top = top + "px";
-
-
     if (window.bringToFront) window.bringToFront(win);
 
-    let currentIndex = 0, rotation = 0, zoom = 1;
-    const img = win.querySelector("img");
-    const title = win.querySelector(".window-title");
+    const canvas = win.querySelector("#music-visualizer");
+    const ctx = canvas.getContext("2d");
+    const playBtn = win.querySelector("#play-btn");
 
-    function showImage(index) {
-      if (!images.length) return;
-      img.src = images[index];
-      const name = images[index].split("/").pop();
-      title.textContent = `${name} - Windows Picture and Fax Viewer`;
-      img.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
+    // Audio
+    const audio = new Audio("music/song.mp3"); // 🎵 put your song file here
+    audio.loop = true;
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const src = audioCtx.createMediaElementSource(audio);
+    const analyser = audioCtx.createAnalyser();
+    src.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    analyser.fftSize = 256;
+
+    const bufferLength = analyser.frequencyBinCount;
+    const dataArray = new Uint8Array(bufferLength);
+
+    function draw() {
+      requestAnimationFrame(draw);
+      analyser.getByteFrequencyData(dataArray);
+
+      ctx.fillStyle = "black";
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const barWidth = (canvas.width / bufferLength) * 2.5;
+      let x = 0;
+      for (let i = 0; i < bufferLength; i++) {
+        const barHeight = dataArray[i] / 2;
+        ctx.fillStyle = "lime";
+        ctx.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth + 1;
+      }
     }
+    draw();
+
+    playBtn.addEventListener("click", () => {
+      if (audioCtx.state === "suspended") audioCtx.resume();
+      if (audio.paused) audio.play();
+      else audio.pause();
+    });
 
     win.querySelector(".close-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      audio.pause();
       win.remove();
     });
-    win.querySelector(".prev-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      currentIndex = (currentIndex - 1 + images.length) % images.length;
-      rotation = 0; zoom = 1; showImage(currentIndex);
-    });
-    win.querySelector(".next-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      currentIndex = (currentIndex + 1) % images.length;
-      rotation = 0; zoom = 1; showImage(currentIndex);
-    });
-    win.querySelector(".rotate-left").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      rotation -= 90; showImage(currentIndex);
-    });
-    win.querySelector(".rotate-right").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      rotation += 90; showImage(currentIndex);
-    });
-    win.querySelector(".zoom-in").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      zoom += 0.1; showImage(currentIndex);
-    });
-    win.querySelector(".zoom-out").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      zoom = Math.max(0.1, zoom - 0.1); showImage(currentIndex);
-    });
-    win.querySelector(".slideshow").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        rotation = 0; zoom = 1;
-        showImage(currentIndex);
-      }, 3000);
-    });
-
-    if (images.length) showImage(currentIndex);
-
-    makeDraggable(win);
-    document.body.appendChild(win);
-    if (window.bringToFront) window.bringToFront(win);
   }
 
-  document.getElementById("images-icon").addEventListener("dblclick", () => {
-    SoundFX.click();  // 👈 add this line
+  // Helper: detect mobile
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  const imagesIcon = document.getElementById("images-icon");
+  if (isMobile()) {
+    imagesIcon.addEventListener("click", handler);
+  } else {
+    imagesIcon.addEventListener("dblclick", handler);
+
+    // 👇 Auto-open ONLY on desktop
     fetch("images.json")
       .then(res => res.json())
       .then(data => {
         const shuffled = data.sort(() => Math.random() - 0.5);
         openImageViewer(shuffled);
       });
+  }
   });
-  
-  fetch("images.json")
-  .then(res => res.json())
-  .then(data => {
-    const shuffled = data.sort(() => Math.random() - 0.5);
-    openImageViewer(shuffled);
-  });
-
-});

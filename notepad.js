@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     win.style.left = Math.random() * 200 + "px";
 
     win.querySelector(".close-btn").addEventListener("click", () => {
-      SoundFX.click();  // 👈 add this line
+      if (window.SoundFX) SoundFX.close();
       win.remove();
     });
 
@@ -49,16 +49,31 @@ document.addEventListener("DOMContentLoaded", () => {
     if (window.bringToFront) window.bringToFront(win);
   }
 
+  // Helper: detect mobile
+  function isMobile() {
+    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  }
+
+  // Attach handlers to icons
   document.querySelectorAll('.icon[data-file]').forEach(icon => {
-    icon.addEventListener("dblclick", () => {
+    const handler = () => {
       const file = icon.dataset.file;
       if (file && file.endsWith(".txt")) {
-        SoundFX.click();  // 👈 add this line
+        if (window.SoundFX) {
+          SoundFX.open();
+          SoundFX.click();
+        }
         openNotepad(file);
       }
-    });
+    };
+
+    if (isMobile()) {
+      icon.addEventListener("click", handler);   // one tap on mobile
+    } else {
+      icon.addEventListener("dblclick", handler); // double click on desktop
+    }
   });
 
-  // Auto-open README.txt
+  // Auto-open README.txt on startup
   openNotepad("readme.txt");
 });
