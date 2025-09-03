@@ -351,3 +351,38 @@ html, body {
   overflow: hidden;   /* 🚫 disables scrollbars */
   touch-action: none; /* 🚫 disables touch scrolling/panning */
 }
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  /* 🔹 Make icons bigger */
+  .icon img {
+    width: 96px;   /* larger icons */
+    height: 96px;
+  }
+
+  .icon span {
+    font-size: 18px; /* larger label text */
+  }
+
+  /* 🔹 Windows should nearly fill screen */
+  .window {
+    width: 95vw !important;
+    height: 85vh !important;
+    left: 2.5vw !important;
+    top: 5vh !important;
+  }
+
+  /* 🔹 Make window content text bigger */
+  .notepad-content pre,
+  .notepad-content,
+  .image-content,
+  .music-content {
+    font-size: 20px; /* bigger text */
+    line-height: 1.5;
+  }
+
+  /* 🔹 Toolbar buttons in image viewer */
+  .image-toolbar button img {
+    width: 32px;   /* bigger toolbar icons */
+    height: 32px;
+  }
+}
