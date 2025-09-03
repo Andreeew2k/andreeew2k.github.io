@@ -29,7 +29,28 @@ document.addEventListener("DOMContentLoaded", () => {
   function openImageViewer(images = []) {
     const win = tpl.content.firstElementChild.cloneNode(true);
     win.style.display = "block";
+
+    // Append first so offsetWidth/offsetHeight are measurable
     document.body.appendChild(win);
+
+    // Calculate safe position (within viewport, right half only)
+    const winWidth = win.offsetWidth || 500;  // fallback
+    const winHeight = win.offsetHeight || 400;
+
+    // define horizontal bounds
+    const minLeft = Math.floor(window.innerWidth * 0.5); // 50% of screen
+    const maxLeft = Math.max(minLeft, window.innerWidth - winWidth - 20); // keep 20px margin
+
+    // define vertical bounds
+    const minTop = 0;
+    const maxTop = Math.max(0, window.innerHeight - winHeight - 20);
+
+    const left = Math.floor(Math.random() * (maxLeft - minLeft + 1) + minLeft);
+    const top = Math.floor(Math.random() * (maxTop - minTop + 1) + minTop);
+
+    win.style.left = left + "px";
+    win.style.top = top + "px";
+
 
     if (window.bringToFront) window.bringToFront(win);
 
@@ -45,39 +66,38 @@ document.addEventListener("DOMContentLoaded", () => {
       img.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
     }
 
-    // Toolbar actions
     win.querySelector(".close-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.close();
+      SoundFX.click();  // 👈 add this line
       win.remove();
     });
     win.querySelector(".prev-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       rotation = 0; zoom = 1; showImage(currentIndex);
     });
     win.querySelector(".next-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       currentIndex = (currentIndex + 1) % images.length;
       rotation = 0; zoom = 1; showImage(currentIndex);
     });
     win.querySelector(".rotate-left").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       rotation -= 90; showImage(currentIndex);
     });
     win.querySelector(".rotate-right").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       rotation += 90; showImage(currentIndex);
     });
     win.querySelector(".zoom-in").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       zoom += 0.1; showImage(currentIndex);
     });
     win.querySelector(".zoom-out").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       zoom = Math.max(0.1, zoom - 0.1); showImage(currentIndex);
     });
     win.querySelector(".slideshow").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click();
+      SoundFX.click();  // 👈 add this line
       setInterval(() => {
         currentIndex = (currentIndex + 1) % images.length;
         rotation = 0; zoom = 1;
@@ -88,35 +108,25 @@ document.addEventListener("DOMContentLoaded", () => {
     if (images.length) showImage(currentIndex);
 
     makeDraggable(win);
+    document.body.appendChild(win);
     if (window.bringToFront) window.bringToFront(win);
   }
 
-  // Helper: detect mobile
-  function isMobile() {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-  }
-
-  // Common handler
-  const handler = () => {
-    if (window.SoundFX) {
-      SoundFX.open();
-      SoundFX.click();
-    }
+  document.getElementById("images-icon").addEventListener("dblclick", () => {
+    SoundFX.click();  // 👈 add this line
     fetch("images.json")
       .then(res => res.json())
       .then(data => {
         const shuffled = data.sort(() => Math.random() - 0.5);
         openImageViewer(shuffled);
       });
-  };
+  });
+  
+  fetch("images.json")
+  .then(res => res.json())
+  .then(data => {
+    const shuffled = data.sort(() => Math.random() - 0.5);
+    openImageViewer(shuffled);
+  });
 
-  const imagesIcon = document.getElementById("images-icon");
-  if (isMobile()) {
-    imagesIcon.addEventListener("click", handler);   // one tap on mobile
-  } else {
-    imagesIcon.addEventListener("dblclick", handler); // double click on desktop
-
-    // Auto-open on desktop only
-    handler();
-  }
 });
