@@ -335,3 +335,88 @@ body, .desktop, .icon, img, span {
     height: 32px;
   }
 }
+
+.travelmap-window {
+  position: absolute;
+  top: 150px;
+  left: 150px;
+  width: 700px;
+  height: 500px;
+  border: 2px solid #000080;
+  background: #ece9d8;
+  display: none;
+  resize: both;
+  overflow: hidden;
+  z-index: 200;
+  font-family: Tahoma, sans-serif;
+  font-size: 13px;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+/* XP-style frame */
+.map-frame {
+  flex: 1;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Tabs */
+/* Tabs container */
+.tab-bar {
+  display: flex;
+  gap: 2px;
+  padding: 2px 6px 0;
+  /* ❌ remove the solid background bar */
+  background: transparent;
+  border-bottom: none; /* remove thick dark line */
+}
+
+/* Tab buttons */
+.tab-btn {
+  background: #ece9d8;
+  border: 2px solid #808080;
+  border-bottom: none;
+  padding: 4px 14px;
+  font-size: 12px;
+  cursor: pointer;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  position: relative;
+  top: 2px; /* makes them overlap slightly */
+}
+
+.tab-btn.active {
+  background: #fff;
+  font-weight: bold;
+  border-bottom: 2px solid #fff; /* blend into content */
+  z-index: 2;
+}
+
+
+/* Map container + tabs */
+.map-container {
+  flex: 1;                /* take up remaining height */
+  position: relative;
+  border: 2px inset #808080;
+  background: #fff;
+  min-height: 200px;      /* ensure it doesn’t collapse */
+}
+
+.map-tab {
+  position: absolute;
+  inset: 0;
+}
+
+.map-tab.hidden {
+  display: none;
+}
+
+/* Leaflet map fills its tab */
+.map-tab .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+}

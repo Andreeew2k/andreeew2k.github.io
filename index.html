@@ -30,7 +30,6 @@
       <img src="icons/folder_files.png" alt="projects">
       <span>Projects</span>
     </div>
-
   </div>
 
     <!-- Right side column -->
@@ -40,17 +39,48 @@
       <img src="icons/README.png" alt="README">
       <span>README.txt</span>
     </div>
+    
     <div class="icon" data-link="https://steamcommunity.com/id/andrew2k/">
       <img src="icons/steam.png" alt="steam">
       <span>Steam</span>
     </div>
     
-      <div class="icon" id="images-icon">
+    <div class="icon" id="images-icon">
       <img src="icons/folder_images.png" alt="Images">
       <span>Images</span>
     </div>
+    
+    <div class="icon" id="map-icon">
+      <img src="icons/globe.png" alt="Map">
+      <span>World Map</span>
+    </div>
 
   </div>
+
+  <template id="travelmap-template">
+    <div class="window travelmap-window">
+      <div class="title-bar">
+        <span class="window-title">Travel Map</span>
+        <button class="close-btn">X</button>
+      </div>
+
+      <!-- XP-style framed map with tabs -->
+      <div class="map-frame">
+        <div class="tab-bar">
+          <button class="tab-btn active" data-tab="visited">Visited</button>
+          <button class="tab-btn" data-tab="to-visit">To Visit</button>
+          <button class="tab-btn" data-tab="favorites">Favorites</button>
+        </div>
+        <div class="map-container">
+          <div id="xp-map" class="map-tab" data-tab="visited"></div>
+          <div id="xp-map-to-visit" class="map-tab hidden" data-tab="to-visit"></div>
+          <div id="xp-map-favorites" class="map-tab hidden" data-tab="favorites"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+
 
 
   <!-- Notepad template -->
@@ -105,6 +135,13 @@
       </div>
     </div>
   </template>
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="map.js"></script>
 
     <!-- Scripts -->
     <script src="startup.js"></script>
