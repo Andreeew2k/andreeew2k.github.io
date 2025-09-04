@@ -164,7 +164,7 @@ html, body {
   min-width: 400px;
   min-height: 300px;
   display: none;
-  background: #fff;
+  background: #ece9d8;
   border: 2px solid #000080;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
   resize: both;
@@ -440,7 +440,7 @@ body, .desktop, .icon, img, span {
   font-family: Tahoma, sans-serif;
   display: none;
   flex-direction: column;
-  resize: both;
+  resize: none;
   overflow: hidden;
   z-index: 100;
 }

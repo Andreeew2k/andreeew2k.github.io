@@ -48,8 +48,8 @@ Behind these icons you’ll find the goods:
 - README .......... Opens this README.txt file
 - Images .......... Film shots from my camera archive
 - Steam ........... My account with all classic stuff
-- World map ....... All places I have been too.
-- Minesweeper ..... Game that always was there.
+- World map ....... All places I have been too
+- Minesweeper ..... Game that always was there
 
 ---------------------------------------------------
 
