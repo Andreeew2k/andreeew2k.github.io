@@ -54,13 +54,54 @@
       <img src="icons/globe.png" alt="Map">
       <span>World Map</span>
     </div>
+    <div class="icon" id="minesweeper-icon">
+      <img src="icons/minesweeper.png" alt="Minesweeper">
+      <span>Minesweeper</span>
+    </div>
 
   </div>
 
+  <!-- Minesweeper icon in games bar -->
+
+
+  <!-- Minesweeper window template -->
+  <!-- Game Window Template -->
+  <template id="minesweeper-template">
+    <div class="window minesweeper-window">
+      <div class="title-bar">
+        <span class="window-title">Minesweeper</span>
+        <button class="close-btn">X</button>
+      </div>
+      <div class="minesweeper-content">
+        <div class="minesweeper-toolbar">
+        <div class="counter" id="mine-count">
+          <div class="digit">0</div>
+          <div class="digit">1</div>
+          <div class="digit">0</div>
+        </div>
+
+        <button class="new-game-btn">
+          <img src="icons\minesweep_good.png" alt="New Game" />
+        </button>
+
+        <div class="counter" id="timer">
+          <div class="digit">0</div>
+          <div class="digit">0</div>
+          <div class="digit">0</div>
+        </div>
+
+        </div>
+        <div class="minesweeper-board"></div>
+      </div>
+    </div>
+  </template>
+
+
+  
   <template id="travelmap-template">
     <div class="window travelmap-window">
       <div class="title-bar">
-        <span class="window-title">Travel Map</span>
+        <span class="window-title">World map</span>
         <button class="close-btn">X</button>
       </div>
 
@@ -144,6 +185,7 @@
     <script src="map.js"></script>
 
     <!-- Scripts -->
+    <script src="minesweeper.js"></script>
     <script src="startup.js"></script>
     <script src="sound.js"></script>
     <script src="window-manager.js"></script>

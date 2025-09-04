@@ -48,9 +48,10 @@ Behind these icons you’ll find the goods:
 - README .......... Opens this README.txt file
 - Images .......... Film shots from my camera archive
 - Steam ........... My account with all classic stuff
-- Personal ........ *Check Back Soon*
+- World map ....... All places I have been too.
+- Minesweeper ..... Game that always was there.
 
-----------------------------------------------------
+---------------------------------------------------
 
 This site is alive, evolving, and forever under 
 construction (just like the best websites of 2002). 
