@@ -586,27 +586,24 @@ body, .desktop, .icon, img, span {
 }
 .exe-window {
   position: absolute;
-  top: 100px;
-  left: 100px;
-  width: 800px;
-  height: 750px;
-  min-width: 800px;
-  min-height: 750px;
-  max-width: 800px;
-  max-height: 750px;
+  top: 10vh;
+  left: 10vw;
+  width: clamp(600px, 65vw, 800px);
+  height: clamp(500px, 70vh, 750px);
   background: #000;
   color: #00ff00;
   font-family: monospace;
-  font-size: 16px;     /* ✅ bigger text */
-  line-height: 18px;   /* ✅ spacing matches */
+  font-size: 1rem;
+  line-height: 1.2;
   border: 2px solid #000080;
   display: none;
   box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  z-index: 200;        /* ✅ stays above desktop icons */
+  z-index: 200;
 }
+
 
 .exe-content {
   flex: 1;
