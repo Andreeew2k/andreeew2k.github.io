@@ -26,10 +26,16 @@
       <span>Publication</span>
     </div>
 
-    <div class="icon" data-link="">
+    <!-- <div class="icon" data-link="">
       <img src="icons/folder_files.png" alt="projects">
       <span>Projects</span>
+    </div> -->
+
+    <div class="icon" id="exe-icon">
+      <img src="icons/exe.png" alt="Executable">
+      <span>Industry Projects.exe</span>
     </div>
+
   </div>
 
     <!-- Right side column -->
@@ -54,14 +60,30 @@
       <img src="icons/globe.png" alt="Map">
       <span>World Map</span>
     </div>
-    <div class="icon" id="minesweeper-icon">
+    <!-- <div class="icon" id="minesweeper-icon">
       <img src="icons/minesweeper.png" alt="Minesweeper">
       <span>Minesweeper</span>
-    </div>
+    </div> -->
 
   </div>
 
-  <!-- Minesweeper icon in games bar -->
+  <!-- EXE window template -->
+  <template id="exe-template">
+    <div class="window exe-window">
+      <div class="title-bar">
+        <span class="window-title">McAfee.exe</span>
+        <button class="close-btn">X</button>
+      </div>
+      <div class="exe-content">
+        <pre class="exe-header"></pre>
+        <pre class="exe-body"></pre>
+        <div class="exe-prompt">
+          <span>Press <b>Enter</b> or <b>Click</b> to continue </span>
+          <span class="blinker">█</span>
+        </div>
+      </div>
+    </div>
+  </template>
 
 
   <!-- Minesweeper window template -->
@@ -181,6 +203,8 @@
   
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    
+    <script src="exe.js"></script>
 
     <script src="map.js"></script>
 

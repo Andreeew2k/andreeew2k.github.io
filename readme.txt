@@ -1,5 +1,5 @@
 ====================================================
-               WELCOME TO MY WEBSITE
+  WELCOME TO MY (DESKOP OPTIMIZED FOR NOW) WEBSITE 
 ====================================================
 
 Welcome, traveler. You have chosen — or perhaps been 
@@ -19,11 +19,18 @@ Hi! My name is Andrii Lenyshyn. I am a graduate
 student with 3+ years of academic and industry HCI 
 experience.
 
-A little bit about me:
+A little bit "formal" about me:
 - On my way toward a PhD in Computer Science @ UofT
 - Proud member of the CHAI Lab
 - Currently on a leave of absence for an industry 
   role as a UX Researcher @ McAfee
+
+A little bit "informal" about me:
+- I like to take take pictures with my old film camera:
+Canon Rebel G II 35mm SLR
+- One of my life goals is to visit each country!
+- I enjoy good belgian beer, and even brew some small
+batches at home:)
 
 ════════════════════════ ⋆★⋆ ═══════════════════════
                 (っ◔◡◔)っ ♥ README ♥
@@ -40,7 +47,7 @@ Behind these icons you’ll find the goods:
 ----------------------------------------------------
 - Resume .......... Opens a PDF with my current CV
 - Publication ..... Links to my research paper
-- Projects ........ *Check Back Soon*
+- Projects ........ Industry projects from McAfee
 
 ----------------------------------------------------
  INFORMAL FILES - ON THE RIGHT
@@ -49,7 +56,7 @@ Behind these icons you’ll find the goods:
 - Images .......... Film shots from my camera archive
 - Steam ........... My account with all classic stuff
 - World map ....... All places I have been too
-- Minesweeper ..... Game that always was there
+- Minesweeper ..... *Check Back Soon*
 
 ---------------------------------------------------
 

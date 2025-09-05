@@ -1,0 +1,84 @@
+===PAGE===
+
+Project: Purchase - onboarding study
+Subject: ████████████████████████████████████████
+Status: Completed
+
+- Defined research scope and methodology with stakeholders
+- Created discussion guide for research questions
+- Conducted usability tests with 7 participants
+- Analyzed results with dscout, and synthesized findings into a comprehensive report
+- Presented findings and actionable recommendations
+
+Key findings: ████████████████████████████████████████
+Recommendations: █████████████████████████████████████
+
+UX tools: dscout, Figma, EnjoyHQ
+UX techniques: thematic analysis, affinity mapping, usability testing
+
+===PAGE===
+
+Subject: ████████████████████████████████████████
+Project: FullStory audit of authentication flow
+Status: Completed
+
+- Mapped current vs. intended design, including ongoing A/B tests 
+- Analyzed user sessions within defined research scope to identify usability issues
+- Synthesized behavioral insights to uncover friction points 
+- Led analysis and insight generation to inform product decisions
+- Collaborated with multiple teams to address issues and propose a reimagined user flow
+
+Key findings: ████████████████████████████████████████
+Recommendations: █████████████████████████████████████
+
+UX tools: Fullstory
+
+===PAGE===
+
+
+Subject: ████████████████████████████████████████
+Project: FullStory audit of authentication flow
+Status: Completed
+
+- Conducted analysis of dead and rage clicks to identify friction points and optimize UX
+- Defined research scope targeting global users over a 30-day period
+- Investigated patterns and impact of dead/rage clicks across user flows
+- Clustered related usability issues to identify common causes
+- Delivered findings to senior stakeholders, including VPs
+
+Key findings: ████████████████████████████████████████
+Recommendations: █████████████████████████████████████
+
+UX tools: Fullstory
+
+===PAGE===
+
+Project: Autorenewal Study
+Subject: ████████████████████████████████████████
+Status: Ongoing
+
+- Defined research scope and methodology with stakeholders
+- Created discussion guide for research questions
+- Conducted usability tests with 7 participants
+- Analyzed results with dscout, and synthesized findings into a comprehensive report
+- Presented findings and actionable recommendations
+- .........
+
+UX tools: dscout, Figma, EnjoyHQ
+UX techniques: thematic analysis, affinity mapping, usability testing
+
+
+===PAGE===
+
+Project: Intention investigation on Mobile
+Subject: ████████████████████████████████████████
+Status: Ongoing
+
+- Analyzed data from a year-long user questionnaire to uncover user needs
+- Applied statistical methods in R to extract meaningful insights
+- Identified and grouped common user intentions to inform prioritization of development
+- ......... 
+
+UX tools: Lyssna, R studio
+UX techniques: data analysis, thematic analysis
+

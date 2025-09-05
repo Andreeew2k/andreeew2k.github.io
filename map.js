@@ -81,8 +81,8 @@ function makeDraggable(win) {
         { place: "Montreal", coords: [45.5, -73.57] },
         { place: "Quebec", coords: [46.81, -71.21] },
         { place: "Ottawa", coords: [45.42, -75.69] },
-        { place: "Bruce National Park", coords: [44.92, -81.37] },
-        { place: "Algonquin National Park", coords: [45.83, -78.37] }
+        { place: "Algonquin National Park", coords: [45.83, -78.37] },
+        { place: "Niagara Falls", coords: [43.08, -79.07] }
       ]
       },
       {
@@ -178,7 +178,6 @@ function makeDraggable(win) {
         { place: "Vilnius", coords: [54.69, 25.28] },
         { place: "Tallinn", coords: [59.44, 24.75] },
         { place: "Mount Saint Michael", coords: [48.636, -1.511] },
-        { place: "Odessa", coords: [46.48, 30.73] },
         { place: "Jerusalem", coords: [31.78, 35.22] },
         { place: "Tel Aviv", coords: [32.08, 34.78] },
         { place: "Cyprus", coords: [35.18, 33.36] },

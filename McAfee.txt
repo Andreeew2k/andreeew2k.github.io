@@ -1,0 +1,36 @@
+
+ooo        ooooo                 .o.        .o88o.                     
+`88.       .888'                .888.       888 `"                     
+ 888b     d'888   .ooooo.      .8"888.     o888oo   .ooooo.   .ooooo.  
+ 8 Y88. .P  888  d88' `"Y8    .8' `888.     888    d88' `88b d88' `88b 
+ 8  `888'   888  888         .88ooo8888.    888    888ooo888 888ooo888 
+ 8    Y     888  888   .o8  .8'     `888.   888    888    .o 888    .o 
+o8o        o888o `Y8bod8P' o88o     o8888o o888o   `Y8bod8P' `Y8bod8P'
+
+
+========================================================================================
+
+Location................................................................ Remote, Toronto
+Position.................................................................. UX Researcher
+Duration................................................................. May 2025 - Now
+Details.............................................................. Confidential (NDA)
+Domain................................................................ Software Security
+
+========================================================================================
+
+Subject: ████████████████████████████████████████
+Project: PURCHASE & ONBOARDING STUDY
+
+
+- Defined research scope and methodology with stakeholders
+- Created discussion guide for research questions
+- Conducted usability tests with 7 participants
+- Analyzed results with dscout, and synthesized findings into a comprehensive report
+- Presented findings and actionable recommendations
+
+Key findings: ████████████████████████████████████████
+Recommendations: █████████████████████████████████████
+
+UX tools: dscout, Figma, EnjoyHQ
+UX techniques: thematic analysis, affinity mapping, usability testing
+========================================================================================
