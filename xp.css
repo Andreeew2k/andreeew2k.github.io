@@ -641,8 +641,7 @@ body, .desktop, .icon, img, span {
   animation: blink 1s step-start infinite;
 }
 
-
-@keyframes blink {
+ @keyframes blink {
   50% { opacity: 0; }
 }
 /* 
@@ -685,6 +684,8 @@ body, .desktop, .icon, img, span {
   .image-window,
   .travelmap-window,
   .exe-window {
+    min-width: 400px;
+    min-height: 300px;
     width: 85vw !important;
     height: 75vh !important;
     top: 10vh !important;

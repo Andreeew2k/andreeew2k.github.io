@@ -58,13 +58,9 @@ function makeDraggable(win) {
         maxZoom: 19
       }).addTo(map);
 
-      // ✅ prevent dragging outside the current view
-      map.setMaxBounds([[-90, -180], [90, 180]]);
-      map.setMaxBoundsViscosity(1.0); // 1.0 = hard lock, 0.0 = free
-
+      
       return map;
     }
-
 
     const visitedMap = initMap("#xp-map");
     const toVisitMap = initMap("#xp-map-to-visit");
