@@ -692,51 +692,11 @@ body, .desktop, .icon, img, span {
     left: 7.5vw !important;
   }
 }
-
-/* Mobile phones (≤ 768px wide) */
-@media (max-width: 768px) {
-  .window,
-  .image-window,
-  .travelmap-window,
-  .exe-window {
-    width: 95vw !important;
-    height: 85vh !important;
-    top: 5vh !important;
-    left: 2.5vw !important;
-  }
-
-  /* Bigger readable text */
-  .notepad-content pre,
-  .exe-content,
-  .image-content {
-    font-size: 18px;
-    line-height: 1.5;
-  }
-
-  /* Larger buttons/icons for touch */
-  .icon img,
-  .games-bar .icon img {
-    width: 96px;
-    height: 96px;
-  }
-
-  .icon span,
-  .games-bar .icon span {
-    font-size: 18px;
-  }
-
-  .image-toolbar button img {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-
 /* =========================
    Mobile Fullscreen Mode
    ========================= */
 @media (max-width: 768px) {
-  /* Windows go fullscreen on mobile */
+  /* 🔹 Windows go fullscreen on mobile */
   .window,
   .image-window,
   .travelmap-window,
@@ -751,30 +711,42 @@ body, .desktop, .icon, img, span {
     max-height: 100vh !important;
     margin: 0 !important;
     border-radius: 0 !important;
-    resize: none !important;  /* prevent weird resize handles */
+    resize: none !important;
   }
 
-  /* Content: allow vertical scroll but prevent horizontal overflow */
+  /* 🔹 Bigger readable text inside windows */
   .notepad-content,
   .notepad-content pre,
   .exe-content,
   .exe-header,
   .exe-body,
   .exe-prompt {
-    white-space: pre-wrap;    /* ✅ wrap on mobile for readability */
-    overflow-x: hidden;       /* ✅ no sideways scroll */
-    overflow-y: auto;         /* ✅ allow vertical scroll */
     font-size: clamp(16px, 4vw, 20px);
     line-height: 1.5;
+    white-space: pre-wrap;  /* wrap text for readability */
+    overflow-x: hidden;     /* no sideways scroll */
+    overflow-y: auto;       /* allow vertical scroll */
   }
 
-  /* Bigger toolbar buttons for touch */
+  /* 🔹 Bigger desktop icons + text on mobile */
+  .icon img,
+  .games-bar .icon img {
+    width: clamp(96px, 20vw, 128px);
+    height: clamp(96px, 20vw, 128px);
+  }
+
+  .icon span,
+  .games-bar .icon span {
+    font-size: clamp(16px, 5vw, 22px);
+  }
+
+  /* 🔹 Bigger toolbar buttons */
   .image-toolbar button img {
     width: 32px;
     height: 32px;
   }
 
-  /* Minesweeper scales down */
+  /* 🔹 Minesweeper scales down for small screens */
   .minesweeper-board {
     grid-template-columns: repeat(9, minmax(20px, 1fr));
     grid-template-rows: repeat(9, minmax(20px, 1fr));
