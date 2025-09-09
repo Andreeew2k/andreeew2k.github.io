@@ -735,7 +735,7 @@ body, .desktop, .icon, img, span {
 /* =========================
    Mobile Fullscreen Mode
    ========================= */
-@@media (max-width: 768px) {
+@media (max-width: 768px) {
   /* Windows go fullscreen on mobile */
   .window,
   .image-window,
@@ -747,10 +747,11 @@ body, .desktop, .icon, img, span {
     left: 0 !important;
     width: 100vw !important;
     height: 100vh !important;
-    max-width: 100vw;
-    max-height: 100vh;
+    max-width: 100vw !important;
+    max-height: 100vh !important;
     margin: 0 !important;
     border-radius: 0 !important;
+    resize: none !important;  /* prevent weird resize handles */
   }
 
   /* Content: allow vertical scroll but prevent horizontal overflow */
@@ -760,11 +761,11 @@ body, .desktop, .icon, img, span {
   .exe-header,
   .exe-body,
   .exe-prompt {
-    white-space: pre;        /* ✅ keep formatting (no wrapping) */
-    overflow-x: hidden;      /* ✅ no sideways scroll */
-    overflow-y: auto;        /* ✅ allow vertical scroll */
-    font-size: clamp(12px, 3vw, 16px);
-    line-height: 1.3;
+    white-space: pre-wrap;    /* ✅ wrap on mobile for readability */
+    overflow-x: hidden;       /* ✅ no sideways scroll */
+    overflow-y: auto;         /* ✅ allow vertical scroll */
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.5;
   }
 
   /* Bigger toolbar buttons for touch */
@@ -775,11 +776,11 @@ body, .desktop, .icon, img, span {
 
   /* Minesweeper scales down */
   .minesweeper-board {
-    grid-template-columns: repeat(9, minmax(18px, 1fr));
-    grid-template-rows: repeat(9, minmax(18px, 1fr));
+    grid-template-columns: repeat(9, minmax(20px, 1fr));
+    grid-template-rows: repeat(9, minmax(20px, 1fr));
   }
   .minesweeper-cell {
-    font-size: clamp(10px, 2.5vw, 14px);
+    font-size: clamp(12px, 3vw, 16px);
     line-height: 1.2;
   }
 }
