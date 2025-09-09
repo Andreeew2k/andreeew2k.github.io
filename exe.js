@@ -17,6 +17,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const bodyEl = windowEl.querySelector(".exe-body");
     const promptEl = windowEl.querySelector(".exe-prompt");
 
+    const margin = 20;
+    const defaultWidth = 700;
+    const defaultHeight = 500;
+    const maxWidth = window.innerWidth - margin * 2;
+    const maxHeight = window.innerHeight - margin * 2;
+
+    // ✅ base min sizes
+    const minWidth = 400;
+    windowEl.style.minWidth = minWidth + "px";
+    windowEl.style.maxWidth = maxWidth + "px";
+    windowEl.style.maxHeight = maxHeight + "px";
+
+    // ✅ ensure height can show at least 20 lines
+    const lineHeight = parseFloat(getComputedStyle(bodyEl).lineHeight || 18);
+    const minHeight = lineHeight * 32 + 120; // add space for header + prompt
+    windowEl.style.minHeight = Math.min(minHeight, maxHeight) + "px";
+
+    // initial size
+    windowEl.style.width = Math.min(defaultWidth, maxWidth) + "px";
+    windowEl.style.height = Math.min(defaultHeight, maxHeight) + "px";
+
+    // spawn position (desktop: only left half)
+    const safeLeft = Math.random() * (maxWidth / 2 - parseInt(windowEl.style.width));
+    const safeTop = Math.random() * (maxHeight - parseInt(windowEl.style.height));
+    windowEl.style.left = safeLeft + margin + "px";
+    windowEl.style.top = safeTop + margin + "px";
+
     // ✅ stable header text
     const headerText = `
 ooo        ooooo                 .o.        .o88o.                     
@@ -27,20 +54,35 @@ ooo        ooooo                 .o.        .o88o.
  8    Y     888  888   .o8  .8'     \`888.   888    888    .o 888    .o 
 o8o        o888o \`Y8bod8P' o88o     o8888o o888o   \`Y8bod8P' \`Y8bod8P' 
 
-
-========================================================================================
-
-Location................................................................ Remote, Toronto
-Position.................................................................. UX Researcher
-Duration................................................................. May 2025 - Now
-Details.............................................................. Confidential (NDA)
+======================================================================================== 
+Location................................................................ Remote, Toronto 
+Position.................................................................. UX Researcher 
+Duration................................................................. May 2025 - Now 
+Details.............................................................. Confidential (NDA) 
 Domain................................................................ Software Security
-
 ========================================================================================
 `;
     headerEl.textContent = headerText;
 
-    // ✅ load projects from external file
+    // ✅ measure header width in pixels
+    const tempSpan = document.createElement("span");
+    tempSpan.style.visibility = "hidden";
+    tempSpan.style.position = "absolute";
+    tempSpan.style.whiteSpace = "pre";
+    tempSpan.style.fontFamily = getComputedStyle(headerEl).fontFamily;
+    tempSpan.style.fontSize = getComputedStyle(headerEl).fontSize;
+    tempSpan.textContent = headerText;
+    document.body.appendChild(tempSpan);
+    const headerWidth = tempSpan.getBoundingClientRect().width;
+    tempSpan.remove();
+
+    const headerMinWidth = Math.min(headerWidth + 40, maxWidth);
+    windowEl.style.minWidth = headerMinWidth + "px";
+    if (parseInt(windowEl.style.width) < headerMinWidth) {
+      windowEl.style.width = headerMinWidth + "px";
+    }
+
+    // ✅ load projects
     fetch("mcafee_projects.txt")
       .then(res => res.text())
       .then(fileText => {
@@ -60,13 +102,11 @@ Domain................................................................ Software 
 
           function step() {
             if (skipMode) {
-              // print instantly
               bodyEl.textContent = text;
               typing = false;
               if (callback) callback();
               return;
             }
-
             if (i < text.length) {
               bodyEl.textContent += text.charAt(i);
               i++;
@@ -81,34 +121,37 @@ Domain................................................................ Software 
 
         function loadNextPage() {
           if (typing) {
-            // skip current typing
-            skipMode = true;
+            skipMode = true; // skip current typing
             return;
           }
-
           if (pageIndex < pages.length) {
             bodyEl.classList.add("fade-out");
             setTimeout(() => {
               bodyEl.classList.remove("fade-out");
               typeWriter(pages[pageIndex], () => {
+                promptEl.textContent = "Press Enter/Click to Continue";
                 promptEl.style.display = "block";
               });
               pageIndex++;
             }, 300);
             promptEl.style.display = "none";
           } else {
-            // ✅ End of report → offer restart
             bodyEl.textContent = "";
-            promptEl.innerHTML = "<span>End of Report — Press Enter/Click to Start Over</span>";
-            pageIndex = 0; // reset for restart
+            promptEl.textContent = "End of Report — Press Enter/Click to Start Over";
+            pageIndex = 0;
           }
         }
 
-        // first prompt
+        // ✅ triggers
         promptEl.style.display = "block";
+        promptEl.textContent = "Press Enter/Click to Continue";
 
-        // triggers
-        promptEl.addEventListener("click", loadNextPage);
+        // click inside window but NOT the title bar/close button → skip
+        windowEl.addEventListener("click", (e) => {
+          if (e.target.closest(".title-bar")) return; // ignore title bar + buttons
+          loadNextPage();
+        });
+
         document.addEventListener("keydown", (e) => {
           if (e.key === "Enter") loadNextPage();
         });
@@ -134,15 +177,13 @@ Domain................................................................ Software 
     });
 
     document.addEventListener("mousemove", (e) => {
-      if (!isDragging) return; // Only move if dragging
-      let newLeft = e.clientX - offsetX; // Calculate new left position
-      let newTop = e.clientY - offsetY;  // Calculate new top position
-      // Clamp left position within viewport
+      if (!isDragging) return;
+      let newLeft = e.clientX - offsetX;
+      let newTop = e.clientY - offsetY;
       newLeft = Math.max(0, Math.min(newLeft, window.innerWidth - win.offsetWidth));
-      // Clamp top position within viewport
       newTop = Math.max(0, Math.min(newTop, window.innerHeight - win.offsetHeight));
-      win.style.left = `${newLeft}px`; // Set window left position
-      win.style.top = `${newTop}px`;   // Set window top position
+      win.style.left = `${newLeft}px`;
+      win.style.top = `${newTop}px`;
     });
 
     document.addEventListener("mouseup", () => {
