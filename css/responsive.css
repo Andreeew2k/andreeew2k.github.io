@@ -32,7 +32,29 @@
     resize: none !important;
     overflow: auto !important;   /* ✅ scrollable content */
   }
-
+  .title-bar {
+    background: linear-gradient(#245edb, #1040a0);
+    color: white;
+    padding: 12px 12px;
+    cursor: move;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Tahoma", sans-serif;
+    font-size: 20px;
+    user-select: none;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .close-btn {
+    background: #c00;
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    font-weight: bold;
+  }
   /* Make the content areas scrollable if needed */
   .notepad-content,
   .exe-content,
@@ -50,22 +72,21 @@
   .exe-header,
   .exe-body,
   .exe-prompt {
-    font-size: clamp(16px, 4vw, 20px);
-    line-height: 1.5;
+    font-size: clamp(18, 3vw, 20px);
+    line-height: 1;
     white-space: pre-wrap;
-    overflow-x: hidden;
-    overflow-y: auto;
+
   }
 
   /* Bigger icons */
   .icon img,
   .games-bar .icon img {
-    width: clamp(112px, 24vw, 144px);
-    height: clamp(112px, 24vw, 144px);
+    width: clamp(64px, 10vw, 80px);
+    height: clamp(64px, 10vw, 80px);
   }
   .icon span,
   .games-bar .icon span {
-    font-size: clamp(16px, 5vw, 22px);
+    font-size: clamp(14px, 3vw, 18px);
   }
 
   /* Minesweeper grid shrink */

@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
    * Open a new Notepad window
    * @param {string} file - Path to the .txt file to load (default: readme.txt)
    */
-  function openNotepad(file = "readme.txt") {
+  function openNotepad(file = "readme_mobile.txt") {
     const tpl = document.getElementById("notepad-template");
     if (!tpl) {
       console.error("❌ Notepad template missing");
@@ -121,5 +121,5 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Auto-open README.txt on startup
-  openNotepad("readme.txt");
+  openNotepad("readme_mobile.txt");
 });

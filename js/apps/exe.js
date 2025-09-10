@@ -19,13 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Desktop margins
     const margin = 20;
-    const defaultWidth = 700;
+    const defaultWidth = 500;
     const defaultHeight = 500;
     const maxWidth = window.innerWidth - margin * 2;
     const maxHeight = window.innerHeight - margin * 2;
 
     // Constraints
-    win.style.minWidth = "400px";
+    win.style.minWidth = "300px";
     win.style.maxWidth = maxWidth + "px";
     win.style.maxHeight = maxHeight + "px";
 
@@ -65,7 +65,25 @@ Details.............................................................. Confidenti
 Domain................................................................ Software Security
 ========================================================================================
 `;
-    headerEl.textContent = headerText;
+    const headerMobileText = `
+                                              
+ ▄    ▄         ▄▄    ▄▀▀               
+ ██  ██  ▄▄▄    ██  ▄▄█▄▄  ▄▄▄   ▄▄▄  
+ █ ██ █ █▀  ▀  █  █   █   █▀  █ █▀  █ 
+ █ ▀▀ █ █      █▄▄█   █   █▀▀▀▀ █▀▀▀▀ 
+ █    █ ▀█▄▄▀ █    █  █   ▀█▄▄▀ ▀█▄▄▀ 
+                                      
+                                      
+ ======================================
+ Location.............. Remote, Toronto
+ Position................ UX Researcher
+ Duration............... May 2025 - Now
+ Details............ Confidential (NDA)
+ Domain.............. Software Security
+ ======================================
+ `;
+
+    headerEl.textContent = headerMobileText;
 
     // Measure header width and adjust minWidth
     const tempSpan = document.createElement("span");
