@@ -30,7 +30,18 @@
     margin: 0 !important;
     border-radius: 0 !important;
     resize: none !important;
+    overflow: auto !important;   /* ✅ scrollable content */
   }
+
+  /* Make the content areas scrollable if needed */
+  .notepad-content,
+  .exe-content,
+  .image-content,
+  .music-content,
+  .map-container {
+    overflow-y: auto !important;
+  
+}
 
   /* Bigger text */
   .notepad-content,
@@ -49,8 +60,8 @@
   /* Bigger icons */
   .icon img,
   .games-bar .icon img {
-    width: clamp(96px, 20vw, 128px);
-    height: clamp(96px, 20vw, 128px);
+    width: clamp(112px, 24vw, 144px);
+    height: clamp(112px, 24vw, 144px);
   }
   .icon span,
   .games-bar .icon span {
