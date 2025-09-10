@@ -49,8 +49,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Viewer logic
     // ----------------------------
     let currentIndex = 0, rotation = 0, zoom = 1;
+    let slideshowInterval = null;
     const img = win.querySelector("img");
     const title = win.querySelector(".window-title");
+    const slideshowBtn = win.querySelector(".slideshow");
 
     function showImage(index) {
       if (!images.length) return;
@@ -59,6 +61,26 @@ document.addEventListener("DOMContentLoaded", () => {
       title.textContent = `${name} - Windows Picture and Fax Viewer`;
       img.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
     }
+
+    // Slideshow toggle
+    slideshowBtn.addEventListener("click", () => {
+      if (window.SoundFX) SoundFX.click?.();
+
+      if (slideshowInterval) {
+        // 🔴 Stop slideshow
+        clearInterval(slideshowInterval);
+        slideshowInterval = null;
+        slideshowBtn.classList.remove("active");
+      } else {
+        // 🟢 Start slideshow
+        slideshowInterval = setInterval(() => {
+          currentIndex = (currentIndex + 1) % images.length;
+          rotation = 0; zoom = 1;
+          showImage(currentIndex);
+        }, 3000);
+        slideshowBtn.classList.add("active");
+      }
+    });
 
     // Close button
     win.querySelector(".close-btn").addEventListener("click", () => {
