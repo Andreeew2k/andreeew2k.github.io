@@ -1,0 +1,106 @@
+/* === Base Window === */
+.window {
+  position: absolute;
+  border: 2px solid #000080;
+  background: #fff;
+  box-shadow: 5px 5px 15px rgba(0,0,0,0.5);
+  resize: both;
+  overflow: hidden;
+  display: none;
+  font-family: "Courier New", monospace;
+}
+
+.title-bar {
+  background: linear-gradient(#245edb, #1040a0);
+  color: white;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  cursor: move;
+  user-select: none;
+}
+
+.close-btn {
+  background: #c00;
+  color: white;
+  border: none;
+  width: 24px;
+  height: 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close-btn:hover { background: #f00; }
+
+/* === Notepad === */
+.notepad-content {
+  padding: 4px;
+  height: calc(100% - 52px);
+  overflow: auto;
+  background: #fff;
+  color: #000;
+}
+.notepad-content pre {
+  margin: 0;
+  white-space: pre-wrap;
+  font-size: 18px;
+}
+
+/* === Image Viewer === */
+.image-window { background: #ece9d8; }
+.image-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+.image-toolbar {
+  background: #ece9d8;
+  border-top: 1px solid #aaa;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 6px;
+}
+.image-toolbar button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* === EXE Window === */
+.exe-window {
+  background: #000;
+  color: #0f0;
+  font-family: monospace;
+  display: flex;
+  flex-direction: column;
+}
+.exe-content {
+  flex: 1;
+  padding: 10px;
+  overflow: auto;
+}
+.exe-prompt {
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+/* === Travel Map === */
+.travelmap-window {
+  background: #ece9d8;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* === Minesweeper === */
+.minesweeper-window { background: #ece9d8; }
+.minesweeper-cell {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  text-align: center;
+  font-weight: bold;
+}

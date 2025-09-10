@@ -1,0 +1,56 @@
+/* Medium desktops ≤ 1400px */
+@media (max-width: 1400px) {
+  .window {
+    max-width: 95vw;
+    max-height: 90vh;
+  }
+}
+
+/* Small laptops ≤ 1024px */
+@media (max-width: 1024px) {
+  .window {
+    width: 85vw !important;
+    height: 75vh !important;
+    top: 10vh !important;
+    left: 7.5vw !important;
+  }
+}
+
+/* Mobile ≤ 768px */
+@media (max-width: 768px) {
+  /* Windows fullscreen */
+  .window {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    resize: none !important;
+  }
+
+  /* Bigger text */
+  .notepad-content,
+  .notepad-content pre,
+  .exe-content,
+  .exe-prompt {
+    font-size: clamp(16px, 4vw, 20px);
+    line-height: 1.5;
+  }
+
+  /* Bigger icons */
+  .icon img,
+  .games-bar .icon img {
+    width: clamp(96px, 20vw, 128px);
+    height: clamp(96px, 20vw, 128px);
+  }
+  .icon span,
+  .games-bar .icon span {
+    font-size: clamp(16px, 5vw, 22px);
+  }
+
+  /* Minesweeper grid shrink */
+  .minesweeper-board {
+    grid-template-columns: repeat(9, minmax(20px, 1fr));
+    grid-template-rows: repeat(9, minmax(20px, 1fr));
+  }
+}

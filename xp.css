@@ -338,6 +338,8 @@ body, .desktop, .icon, img, span {
 
 .travelmap-window {
   position: absolute;
+  min-width: 400px;   /* prevent too small */
+  min-height: 300px;
   top: 150px;
   left: 150px;
   width: 700px;
