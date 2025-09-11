@@ -1,6 +1,6 @@
 /* Medium desktops ≤ 1400px */
 @media (max-width: 1400px) {
-  .window {
+  .window:not([style*="position: fixed"]) {
     max-width: 95vw;
     max-height: 90vh;
   }
@@ -8,7 +8,7 @@
 
 /* Small laptops ≤ 1024px */
 @media (max-width: 1024px) {
-  .window {
+  .window:not([style*="position: fixed"]) {
     width: 85vw !important;
     height: 75vh !important;
     top: 10vh !important;
@@ -22,71 +22,37 @@
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100dvw !important;
-    height: 100dvh !important;
-    max-width: 100dvw !important;
-    max-height: 100dvh !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
     margin: 0 !important;
     border: none !important;
     border-radius: 0 !important;
     box-sizing: border-box !important;
-    z-index: 9999;
+    z-index: 9999 !important;
   }
 
-  /* 🔵 Huge Title Bar */
+  /* Huge Title Bar */
   .title-bar {
     background: linear-gradient(#245edb, #1040a0) !important;
     color: white !important;
-    padding: 32px !important;         /* very tall bar */
-    font-size: 32px !important;       /* huge title text */
+    padding: 50px !important;
+    font-size: 50px !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
   }
 
-  /* ❌ Close Button: Big */
+  /* Big Close Button */
   .close-btn {
     background: #c00 !important;
     color: white !important;
     border: none !important;
-    width: 72px !important;           /* large touch area */
+    width: 72px !important;
     height: 72px !important;
-    font-size: 36px !important;       /* huge “X” */
+    font-size: 36px !important;
     font-weight: bold !important;
     cursor: pointer !important;
-  }
-
-
-
-  /* Bigger icons (desktop & games bar) */
-  .icon img,
-  .games-bar .icon img {
-    width: 96px;
-    height: 96px;
-  }
-  .icon span,
-  .games-bar .icon span {
-    font-size: 20px;
-    line-height: 1.2;
-  }
-
-  /* Content areas scrollable */
-  .notepad-content,
-  .exe-content,
-  .image-content,
-  .music-content,
-  .map-container {
-    overflow-y: auto !important;
-  }
-
-  /* Bigger font for text-based apps */
-  .notepad-content,
-  .notepad-content pre,
-  .exe-content,
-  .exe-header,
-  .exe-body,
-  .exe-prompt {
-    font-size: 18px;
-    line-height: 1.4;
   }
 }

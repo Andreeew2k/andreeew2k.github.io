@@ -1,16 +1,15 @@
 // js/apps/notepad.js
 document.addEventListener("DOMContentLoaded", () => {
-  // Ensure global namespace exists
   window.Apps = window.Apps || {};
 
+  // Detect mobile reliably
   function isMobile() {
-    return /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    return (
+      /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      window.innerWidth <= 1024 // ✅ wider breakpoint for tablets
+    );
   }
 
-  /**
-   * Open a new Notepad window
-   * @param {string} file - Path to the .txt file to load (default: readme.txt)
-   */
   function openNotepad(file = "readme_mobile.txt") {
     const tpl = document.getElementById("notepad-template");
     if (!tpl) {
@@ -18,41 +17,46 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Clone window from template
     const win = tpl.content.firstElementChild.cloneNode(true);
     win.style.display = "block";
 
-    // === Desktop sizing logic only ===
-    if (!isMobile()) {
+    if (isMobile()) {
+      // === Mobile → force fullscreen ===
+      Object.assign(win.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        right: "0",
+        bottom: "0",
+        width: "100%",
+        height: "100%",
+        margin: "0",
+        border: "none",
+        borderRadius: "0",
+        zIndex: "9999",
+        display: "flex",
+        flexDirection: "column"
+      });
+    } else {
+      // === Desktop sizing logic ===
       const margin = 20;
       const defaultWidth = 650;
       const defaultHeight = 850;
       const maxWidth = window.innerWidth / 2 - margin * 2;
       const maxHeight = window.innerHeight - margin * 2;
 
-      // Constraints
       win.style.minWidth = "300px";
       win.style.minHeight = "150px";
       win.style.maxWidth = maxWidth + "px";
       win.style.maxHeight = maxHeight + "px";
 
-      // Initial size
       win.style.width = Math.min(defaultWidth, maxWidth) + "px";
       win.style.height = Math.min(defaultHeight, maxHeight) + "px";
 
-      // Randomized safe spawn (desktop only → left half)
       const safeLeft = Math.random() * (maxWidth - parseInt(win.style.width));
       const safeTop = Math.random() * (maxHeight - parseInt(win.style.height));
       win.style.left = safeLeft + margin + "px";
       win.style.top = safeTop + margin + "px";
-    } else {
-      // === Mobile → let CSS handle fullscreen ===
-      win.style.position = "fixed";
-      win.style.top = "0";
-      win.style.left = "0";
-      win.style.right = "0";
-      win.style.bottom = "0";
-      // CSS (responsive.css) forces 100dvw/100dvh
     }
 
     // Close button
@@ -73,8 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(txt => {
           pre.textContent = txt;
 
-          // Adjust minWidth based on longest line (desktop only)
           if (!isMobile()) {
+            // Adjust desktop width to longest line
             const longestLine = txt.split("\n").reduce((a, b) =>
               a.length > b.length ? a : b,
               ""
@@ -104,10 +108,9 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Add window to DOM
     document.body.appendChild(win);
 
-    // Enable dragging + z-index (desktop only)
+    // Desktop only: enable dragging
     if (!isMobile()) {
       if (typeof makeDraggable === "function") makeDraggable(win);
       if (typeof bringToFront === "function") bringToFront(win);
@@ -116,10 +119,9 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ Notepad opened:", file);
   }
 
-  // Expose public API
   window.Apps.Notepad = { open: openNotepad };
 
-  // Attach handlers to icons with data-file
+  // Attach to icons
   document.querySelectorAll(".icon[data-file]").forEach(icon => {
     const handler = () => {
       const file = icon.dataset.file;
@@ -131,14 +133,10 @@ document.addEventListener("DOMContentLoaded", () => {
         openNotepad(file);
       }
     };
-
-    if (isMobile()) {
-      icon.addEventListener("click", handler);
-    } else {
-      icon.addEventListener("dblclick", handler);
-    }
+    if (isMobile()) icon.addEventListener("click", handler);
+    else icon.addEventListener("dblclick", handler);
   });
 
-  // Auto-open README.txt on startup
+  // Auto-open README
   openNotepad("readme_mobile.txt");
 });
