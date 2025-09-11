@@ -37,8 +37,8 @@
   .title-bar {
     background: linear-gradient(#245edb, #1040a0) !important;
     color: white !important;
-    padding: 50px !important;
-    font-size: 50px !important;
+    padding: 12px !important;
+    font-size: 18px !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
@@ -49,9 +49,9 @@
     background: #c00 !important;
     color: white !important;
     border: none !important;
-    width: 72px !important;
-    height: 72px !important;
-    font-size: 36px !important;
+    width: 32px !important;
+    height: 30px !important;
+    font-size: 20px !important;
     font-weight: bold !important;
     cursor: pointer !important;
   }
