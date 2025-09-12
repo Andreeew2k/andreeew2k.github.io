@@ -142,6 +142,14 @@ document.addEventListener("DOMContentLoaded", () => {
       ]
       },
       {
+      group: "Burning Man 2024",
+      reason: "Special thanks to my dear friend for invite",
+      color: "black",
+      places: [
+        { place: "Black Rock Desert", coords: [40.78, -119.19] },
+            ]
+      },
+      {
       group: "Home",
       reason: "I lived here for longer periods of time",
       color: "orange",
@@ -177,7 +185,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { place: "Las Vegas", coords: [36.17, -115.14] },
         { place: "Seattle", coords: [47.61, -122.33] },
         { place: "New York", coords: [40.71, -74.01] },
-        { place: "Black Rock Desert", coords: [40.78, -119.19] },
         { place: "Barcelona", coords: [41.38, 2.17] },
         { place: "Prague", coords: [50.08, 14.44] },
         { place: "Vienna", coords: [48.21, 16.37] },
