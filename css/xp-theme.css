@@ -120,6 +120,8 @@
   flex: 1;
   padding: 10px;
   overflow-y: auto;   /* ✅ scrollable */
+  overflow-x: hidden;     /* 🚫 block horizontal scroll */
+
   font-size: 16px;
   line-height: 18px;
 }

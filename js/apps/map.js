@@ -266,6 +266,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Tab switching
     // ----------------------------
     win.querySelectorAll(".tab-btn").forEach(btn => {
+      if (window.SoundFX) window.SoundFX.click?.();
+
       btn.addEventListener("click", () => {
         win.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
