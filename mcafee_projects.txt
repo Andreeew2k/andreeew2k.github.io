@@ -55,14 +55,13 @@ UX tools: Fullstory
 
 Project: Autorenewal Study
 Subject:  [REDACTED]
-Status: Ongoing
+Status: Completed
 
 - Defined research scope and methodology with stakeholders
 - Created discussion guide for research questions
 - Conducted usability tests with 7 participants
 - Analyzed results with dscout, and synthesized findings into a comprehensive report
 - Presented findings and actionable recommendations
-- .........
 
 UX tools: dscout, Figma, EnjoyHQ
 UX techniques: thematic analysis, affinity mapping, usability testing
@@ -72,12 +71,12 @@ UX techniques: thematic analysis, affinity mapping, usability testing
 
 Project: Intention investigation on Mobile
 Subject:  [REDACTED]
-Status: Ongoing
+Status: Completed
 
 - Analyzed data from a year-long user questionnaire to uncover user needs
 - Applied statistical methods in R to extract meaningful insights
 - Identified and grouped common user intentions to inform prioritization of development
-- ......... 
+- Presented findings and actionable recommendations
 
 UX tools: Lyssna, R studio
 UX techniques: data analysis, thematic analysis

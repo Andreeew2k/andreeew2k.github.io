@@ -1,5 +1,5 @@
 ====================================================
-  WELCOME TO MY (DESKOP OPTIMIZED FOR NOW) WEBSITE 
+              WELCOME TO MY WEBSITE 
 ====================================================
 
 Welcome, traveler. You have chosen — or perhaps been 

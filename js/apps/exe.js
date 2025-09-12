@@ -35,6 +35,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Header text (desktop vs mobile)
     const headerEl = win.querySelector(".exe-header");
     const promptEl = win.querySelector(".exe-prompt");
+    if (isMobile()) {
+      // Move prompt right under header
+      headerEl.insertAdjacentElement("afterend", promptEl);
+    }
     const headerText = `
 ooo        ooooo                 .o.        .o88o.                     
 \`88.       .888'                .888.       888 \`"                     
@@ -71,6 +75,7 @@ Domain................................................................ Software 
 
     // ✅ Apply sizing logic
     if (isMobile()) {
+      
       // Mobile → force fullscreen
       Object.assign(win.style, {
         position: "fixed",
