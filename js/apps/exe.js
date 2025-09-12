@@ -227,8 +227,11 @@ Domain................................................................ Software 
       });
 
     // Close button
-    win.querySelector(".close-btn").addEventListener("click", () => win.remove());
-
+    win.querySelector(".close-btn").addEventListener("click", () => {
+      if (window.SoundFX) window.SoundFX.click?.();
+      win.remove();
+    });
+    
     // Add to DOM + make draggable (desktop only)
     document.body.appendChild(win);
     if (!isMobile()) {

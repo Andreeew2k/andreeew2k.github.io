@@ -50,8 +50,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Close button
-    win.querySelector(".close-btn").addEventListener("click", () => win.remove());
-
+    win.querySelector(".close-btn").addEventListener("click", () => {
+      if (window.SoundFX) window.SoundFX.click?.();
+      win.remove();
+    });
     // Add to DOM + enable dragging
     document.body.appendChild(win);
     makeDraggable(win);

@@ -130,10 +130,12 @@
 .exe-body {
   flex: 1;
   padding: 10px;
-  overflow-y: auto;   /* ✅ allow scrolling */
+  overflow-y: auto;       /* ✅ only vertical scroll */
+  overflow-x: hidden;     /* 🚫 block horizontal scroll */
   font-size: 16px;
   line-height: 18px;
-  white-space: pre-wrap;
+  white-space: pre-wrap;  /* ✅ keep line breaks */
+  word-break: break-word; /* ✅ break long words/ASCII if needed */
 }
 
 /* ✅ working blinker */

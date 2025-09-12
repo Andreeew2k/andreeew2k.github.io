@@ -4,10 +4,17 @@
 
 Welcome, traveler.
 
-You have chosen — or perhaps been chosen — to explore one of the finest websites I’ve ever assembled.  
-I thought so highly of this site that I decided to host my resume and projects here.
+You have chosen — or perhaps been 
+chosen — to explore one of the 
+finest websites I’ve ever 
+assembled.  
+I thought so highly of this site 
+that I decided to host my resume 
+and projects here.
 
-And so, whether you're here to stay or just passing through on your way to parts unknown...
+And so, whether you're here to 
+stay or just passing through 
+on your way to parts unknown...
 
 WELCOME.
 
@@ -15,8 +22,10 @@ WELCOME.
 ║( ͡° ͜ʖ ͡°) ABOUT ME ( ͡° ͜ʖ ͡°)║  
 ╚══════════════════════════╝  
 
-Hi! I'm Andrii Lenyshyn.  
-I’m a graduate student with 3+ years of academic and industry HCI experience.
+Hi! I'm Andrii Lenyshyn!  
+I’m a graduate student with 3+ 
+years of academic and industry 
+HCI experience.
 
 **A "formal" about me:**
 - Pursuing a PhD in CS @ UofT  
@@ -32,8 +41,11 @@ I’m a graduate student with 3+ years of academic and industry HCI experience.
       (っ◔◡◔)っ ♥ README ♥  
 ════════════ ⋆★⋆ ═════════════  
 
-This site is a Windows XP–inspired desktop replica —  
-a vibecoded tribute to the glow of CRT monitors and my first steps into the world of computers.
+This site is a Windows XP–
+inspired desktop replica — 
+a vibecoded tribute to the glow 
+of CRT monitors and my first 
+steps into the world of CS.
 
 ──────────────────────────────  
 FORMAL FILES  
@@ -53,4 +65,6 @@ INFORMAL FILES
 
 ──────────────────────────────  
 
-This site is alive, evolving, and forever under construction — just like the best websites of 2002.
+This site is alive, evolving, and 
+forever under construction — just 
+like the best websites of 2002.
