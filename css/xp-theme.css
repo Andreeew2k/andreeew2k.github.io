@@ -229,3 +229,6 @@
   border: 2px inset #808080;
   background: #d4d0c8;
 }
+#orientation-overlay {
+  display: none;
+}

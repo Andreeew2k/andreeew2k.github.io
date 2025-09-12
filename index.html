@@ -9,7 +9,6 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
 
   <title>Andrii Lenyshyn HCI | UX</title>
-  <!-- <link rel="stylesheet" href="xp.css"> -->
   <link rel="icon" type="image/png" href="icons/win.png">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/xp-theme.css">
@@ -17,11 +16,13 @@
 </head>
 
 <body>
+
+
   <!-- Selection marquee -->
   <div class="selection-box" id="selection-box"></div>
 
   <!-- Desktop with icons -->
-    <div class="desktop" id="desktop">
+  <div class="desktop" id="desktop">
 
     <div class="icon" data-link="other/Andrii_Lenyshyn_Resume_2025.pdf">
       <img src="icons/word.png" alt="Resume">
@@ -40,7 +41,7 @@
 
   </div>
 
-    <!-- Right side column -->
+  <!-- Right side column -->
   <div class="games-bar" id="games-bar">
 
     <div class="icon" data-file="readme.txt">
@@ -62,10 +63,6 @@
       <img src="icons/globe.png" alt="Map">
       <span>World Map</span>
     </div>
-    <!-- <div class="icon" id="minesweeper-icon">
-      <img src="icons/minesweeper.png" alt="Minesweeper">
-      <span>Minesweeper</span>
-    </div> -->
 
   </div>
 
@@ -87,7 +84,6 @@
     </div>
   </template>
 
-
   <!-- Minesweeper window template -->
   <template id="minesweeper-template">
     <div class="window minesweeper-window">
@@ -97,38 +93,32 @@
       </div>
       <div class="minesweeper-content">
         <div class="minesweeper-toolbar">
-        <div class="counter" id="mine-count">
-          <div class="digit">0</div>
-          <div class="digit">1</div>
-          <div class="digit">0</div>
-        </div>
-
-        <button class="new-game-btn">
-          <img src="icons\minesweep_good.png" alt="New Game" />
-        </button>
-
-        <div class="counter" id="timer">
-          <div class="digit">0</div>
-          <div class="digit">0</div>
-          <div class="digit">0</div>
-        </div>
-
+          <div class="counter" id="mine-count">
+            <div class="digit">0</div>
+            <div class="digit">1</div>
+            <div class="digit">0</div>
+          </div>
+          <button class="new-game-btn">
+            <img src="icons/minesweep_good.png" alt="New Game" />
+          </button>
+          <div class="counter" id="timer">
+            <div class="digit">0</div>
+            <div class="digit">0</div>
+            <div class="digit">0</div>
+          </div>
         </div>
         <div class="minesweeper-board"></div>
       </div>
     </div>
   </template>
 
-
-  
+  <!-- Travel map window template -->
   <template id="travelmap-template">
     <div class="window travelmap-window">
       <div class="title-bar">
         <span class="window-title">World map</span>
         <button class="close-btn">X</button>
       </div>
-
-      <!-- XP-style framed map with tabs -->
       <div class="map-frame">
         <div class="tab-bar">
           <button class="tab-btn active" data-tab="visited">Visited</button>
@@ -143,9 +133,6 @@
       </div>
     </div>
   </template>
-
-
-
 
   <!-- Notepad template -->
   <template id="notepad-template">
@@ -163,6 +150,7 @@
     </div>
   </template>
 
+  <!-- Music template -->
   <template id="music-template">
     <div class="window music-window">
       <div class="title-bar">
@@ -175,8 +163,6 @@
       </div>
     </div>
   </template>
-
-
 
   <!-- Image Viewer template -->
   <template id="imageviewer-template">
@@ -200,35 +186,49 @@
     </div>
   </template>
 
+  <!-- Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-  
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    
-    <!-- Core utilities -->
-    <script src="js/sound.js"></script>
-    <script src="js/window-manager.js"></script>
-    <script src="js/startup.js"></script>
+  <!-- Core utilities -->
+  <script src="js/sound.js"></script>
+  <script src="js/window-manager.js"></script>
+  <script src="js/startup.js"></script>
 
-    <!-- Apps -->
-    <script src="js/apps/notepad.js"></script>
-    <script src="js/apps/exe.js"></script>
-    <script src="js/apps/imageviewer.js"></script>
-    <script src="js/apps/music.js"></script>
-    <script src="js/apps/map.js"></script>
-    <script src="js/apps/minesweeper.js"></script>
+  <!-- Apps -->
+  <script src="js/apps/notepad.js"></script>
+  <script src="js/apps/exe.js"></script>
+  <script src="js/apps/imageviewer.js"></script>
+  <script src="js/apps/music.js"></script>
+  <script src="js/apps/map.js"></script>
+  <script src="js/apps/minesweeper.js"></script>
 
-    <script>
-      // Prevent background scrolling, but allow scroll inside window content
-      document.addEventListener('touchmove', function (e) {
-        // If the target is inside a scrollable app content, allow it
-        if (e.target.closest('.notepad-content, .exe-body, .image-content, .music-content, .map-container')) {
-          return; // ✅ let it scroll
-        }
-        e.preventDefault(); // 🚫 block background scroll
-      }, { passive: false });
-    </script>
+  <script>
+    // ✅ Prevent background scrolling, allow scroll inside windows
+    document.addEventListener('touchmove', function (e) {
+      if (e.target.closest('.notepad-content, .exe-body, .image-content, .music-content, .map-container')) {
+        return;
+      }
+      e.preventDefault();
+    }, { passive: false });
 
+    // ✅ Orientation check → show overlay with GIF on landscape
+    function checkOrientation() {
+      const overlay = document.getElementById("orientation-overlay");
+      if (window.innerWidth > window.innerHeight) {
+        overlay.classList.add("active");
+      } else {
+        overlay.classList.remove("active");
+      }
+    }
+    window.addEventListener("load", checkOrientation);
+    window.addEventListener("resize", checkOrientation);
+    window.addEventListener("orientationchange", checkOrientation);
+  </script>
 
+    <!-- Orientation overlay -->
+  <div id="orientation-overlay">
+    <img src="backgrounds/rotate.gif" alt="Rotate Device">
+  </div>
 </body>
 </html>
