@@ -18,16 +18,17 @@
 
 /* === Mobile ≤ 768px === */
 @media (max-width: 768px) {
-    html, body {
+  html, body {
     overflow-x: hidden !important;   /* ✅ no sideways scroll */
-    max-width: 100vw !important;     /* ✅ clamp width to viewport */
+    max-width: 100vw !important;     /* ✅ clamp width */
     height: 100vh !important;
   }
 
   body {
-    transform: rotate(0deg);         /* ✅ ensure portrait */
-    touch-action: pan-y;             /* ✅ allow only vertical scroll gestures */
+    transform: rotate(0deg);         /* ✅ force portrait */
+    touch-action: pan-y;             /* ✅ vertical gestures only */
   }
+
   .window {
     position: fixed !important;
     top: 0 !important;
@@ -43,6 +44,30 @@
     z-index: 9999 !important;
   }
 
+  /* ✅ Scrollable areas Safari-safe */
+  .notepad-content,
+  .exe-body,
+  .image-content {
+    height: -webkit-fill-available; /* Safari fill */
+    min-height: 0;                  /* prevent flex overflow */
+    overflow-y: auto;
+    overflow-x: hidden;             /* block sideways scroll */
+  }
+
+  .notepad-content pre,
+  .exe-body {
+    line-height: 1.4;               /* safer line height */
+    box-sizing: border-box;
+  }
+
+  /* ✅ Flex children must allow shrink */
+  .exe-content,
+  .map-frame,
+  .notepad-content,
+  .image-content {
+    min-height: 0;
+  }
+
   /* Huge Title Bar */
   .title-bar {
     background: linear-gradient(#245edb, #1040a0) !important;
@@ -55,11 +80,18 @@
   }
 
   /* Big Close Button */
- .close-btn {
+  .close-btn {
     width: 32px !important;
     height: 30px !important;
     font-size: 12px !important;
-    line-height: 1 !important;   /* ✅ keeps X centered */
+    line-height: 1 !important;
     margin-left: 15px !important;
+  }
+}
+
+/* ✅ Safari iOS viewport fix */
+@supports (-webkit-touch-callout: none) {
+  .window {
+    height: -webkit-fill-available !important;
   }
 }
