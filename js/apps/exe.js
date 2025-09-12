@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const tpl = document.getElementById("exe-template");
     if (!tpl) return console.error("❌ Exe template missing");
 
+
     // Prevent multiple windows
     let existing = document.querySelector(".exe-window");
     if (existing) {
@@ -96,7 +97,24 @@ Domain................................................................ Software 
     document.body.appendChild(tempSpan);
     const headerWidth = tempSpan.getBoundingClientRect().width;
     tempSpan.remove();
-
+    if (isMobile()) {
+      // === Mobile → force fullscreen ===
+      Object.assign(win.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        right: "0",
+        bottom: "0",
+        width: "100%",
+        height: "100%",
+        margin: "0",
+        border: "none",
+        borderRadius: "0",
+        zIndex: "9999",
+        display: "flex",
+        flexDirection: "column"
+      });
+    }
     const headerMinWidth = Math.min(headerWidth + 40, maxWidth);
     win.style.minWidth = headerMinWidth + "px";
     if (parseInt(win.style.width) < headerMinWidth) {
@@ -198,7 +216,7 @@ Domain................................................................ Software 
   const exeIcon = document.getElementById("exe-icon");
   if (exeIcon) {
     const handler = () => {
-      if (window.SoundFX) { SoundFX.open?.(); SoundFX.click(); }
+      if (window.SoundFX) { window.SoundFX.click?.(); }
       openExe();
     };
     if (isMobile()) exeIcon.addEventListener("click", handler);

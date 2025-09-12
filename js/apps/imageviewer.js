@@ -3,6 +3,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.Apps = window.Apps || {};
 
   function openImageViewer(images = []) {
+    if (isMobile()){  
+      window.SoundFX?.error?.();  
+      imagesIcon.addEventListener("click", handler);
+      return; // No mobile support
+    }
+      
     const tpl = document.getElementById("imageviewer-template");
     if (!tpl) return console.error("❌ ImageViewer template missing");
 
@@ -64,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Slideshow toggle
     slideshowBtn.addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
 
       if (slideshowInterval) {
         // 🔴 Stop slideshow
@@ -84,51 +90,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Close button
     win.querySelector(".close-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       win.remove();
     });
 
     // Controls
     win.querySelector(".prev-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       currentIndex = (currentIndex - 1 + images.length) % images.length;
       rotation = 0; zoom = 1;
       showImage(currentIndex);
     });
 
     win.querySelector(".next-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       currentIndex = (currentIndex + 1) % images.length;
       rotation = 0; zoom = 1;
       showImage(currentIndex);
     });
 
     win.querySelector(".rotate-left").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       rotation -= 90;
       showImage(currentIndex);
     });
 
     win.querySelector(".rotate-right").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       rotation += 90;
       showImage(currentIndex);
     });
 
     win.querySelector(".zoom-in").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       zoom += 0.1;
       showImage(currentIndex);
     });
 
     win.querySelector(".zoom-out").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       zoom = Math.max(0.1, zoom - 0.1);
       showImage(currentIndex);
     });
 
     win.querySelector(".slideshow").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       setInterval(() => {
         currentIndex = (currentIndex + 1) % images.length;
         rotation = 0; zoom = 1;
@@ -164,7 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const imagesIcon = document.getElementById("images-icon");
   if (imagesIcon) {
     const handler = () => {
-      if (window.SoundFX) SoundFX.click?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       fetch("images.json")
         .then(res => res.json())
         .then(data => {

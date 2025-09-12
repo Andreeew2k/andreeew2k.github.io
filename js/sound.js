@@ -5,6 +5,7 @@ function playSound(src, volume = 0.5) {
 }
 
 // Pre-defined shortcuts
-const SoundFX = {
-  click: () => playSound("sounds/click.mp3")
+window.SoundFX = {
+  click: () => playSound("sounds/click.mp3"),
+  error: () => playSound("sounds/error.mp3")
 };

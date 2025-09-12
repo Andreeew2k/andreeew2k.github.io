@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const win = tpl.content.firstElementChild.cloneNode(true);
     win.style.display = "flex";
-
+    
     const margin = 20;
     const defaultWidth = 700;
     const defaultHeight = 500;
@@ -284,7 +284,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const mapIcon = document.getElementById("map-icon");
   if (mapIcon) {
     const handler = () => {
-      if (window.SoundFX) { SoundFX.open?.(); SoundFX.click(); }
+      if (window.SoundFX) { window.SoundFX.click?.();}
       openTravelMap();
     };
     if (isMobile()) mapIcon.addEventListener("click", handler);

@@ -61,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Close button
     win.querySelector(".close-btn").addEventListener("click", () => {
-      if (window.SoundFX) SoundFX.close?.();
+      if (window.SoundFX) window.SoundFX.click?.();
       win.remove();
     });
 
@@ -127,8 +127,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const file = icon.dataset.file;
       if (file?.endsWith(".txt")) {
         if (window.SoundFX) {
-          SoundFX.open?.();
-          SoundFX.click();
+          window.SoundFX.click?.();
         }
         openNotepad(file);
       }
