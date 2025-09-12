@@ -119,12 +119,18 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log("✅ Notepad opened:", file);
   }
 
-  window.Apps.Notepad = { open: openNotepad };
+    window.Apps.Notepad = { open: openNotepad };
 
   // Attach to icons
   document.querySelectorAll(".icon[data-file]").forEach(icon => {
     const handler = () => {
-      const file = icon.dataset.file;
+      let file = icon.dataset.file;
+
+      // ✅ If this is the README icon → choose file by device
+      if (file === "readme.txt" || file === "readme_mobile.txt") {
+        file = isMobile() ? "readme_mobile.txt" : "readme.txt";
+      }
+
       if (file?.endsWith(".txt")) {
         if (window.SoundFX) {
           window.SoundFX.click?.();
@@ -132,10 +138,12 @@ document.addEventListener("DOMContentLoaded", () => {
         openNotepad(file);
       }
     };
+
     if (isMobile()) icon.addEventListener("click", handler);
     else icon.addEventListener("dblclick", handler);
   });
 
-  // Auto-open README
-  openNotepad("readme_mobile.txt");
+  // ✅ Auto-open correct README at startup too
+  const startupFile = isMobile() ? "readme_mobile.txt" : "readme.txt";
+  openNotepad(startupFile);
 });

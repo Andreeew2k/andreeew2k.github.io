@@ -45,14 +45,11 @@
   }
 
   /* Big Close Button */
-  .close-btn {
-    background: #c00 !important;
-    color: white !important;
-    border: none !important;
+ .close-btn {
     width: 32px !important;
     height: 30px !important;
     font-size: 20px !important;
-    font-weight: bold !important;
-    cursor: pointer !important;
+    line-height: 1 !important;   /* ✅ keeps X centered */
+    margin-left: 8px !important;
   }
 }

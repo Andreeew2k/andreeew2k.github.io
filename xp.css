@@ -100,30 +100,33 @@ html, body {
   cursor: move;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  font-family: Tahoma, sans-serif;
+  align-items: center;  /* ✅ keeps close button vertically centered */
+  font-family: "Tahoma", sans-serif;
   font-size: 14px;
   user-select: none;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.title-bar span {
-  flex: 1;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .close-btn {
+  display: flex;              /* ✅ center X inside */
+  align-items: center;        /* ✅ vertical centering */
+  justify-content: center;    /* ✅ horizontal centering */
   background: #c00;
   color: white;
   border: none;
   width: 24px;
   height: 20px;
-  cursor: pointer;
+  margin-left: 6px;           /* ✅ small spacing from text */
   font-weight: bold;
+  line-height: 1;             /* ✅ removes extra shift */
+  padding: 0;                 /* ✅ keeps it snug */
+  cursor: pointer;
 }
-.close-btn:hover { background: #f00; }
+
+.close-btn:hover {
+  background: #f00;
+}
 
 .menu-bar {
   background: #ece9d8;

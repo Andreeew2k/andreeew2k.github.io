@@ -46,7 +46,7 @@
 .notepad-content {
   padding: 4px;
   height: calc(100% - 52px);
-  overflow: auto;
+  overflow-y: auto;   /* ✅ scrollable */
   background: #fff;
   color: #000;
 }
@@ -119,7 +119,7 @@
 .exe-content {
   flex: 1;
   padding: 10px;
-  overflow: auto;
+  overflow-y: auto;   /* ✅ scrollable */
   font-size: 16px;
   line-height: 18px;
 }
@@ -144,7 +144,6 @@
 @keyframes blink {
   50% { opacity: 0; }
 }
-
 .exe-prompt {
   text-align: left;
   color: #0f0;
