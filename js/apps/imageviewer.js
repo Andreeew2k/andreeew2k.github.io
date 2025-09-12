@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!images.length) return;
       img.src = images[index];
       const name = images[index].split("/").pop();
-      title.textContent = `${name} - Windows Picture and Fax Viewer`;
+      title.textContent = `${name} - Picture and Fax Viewer`;
       img.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
     }
 
