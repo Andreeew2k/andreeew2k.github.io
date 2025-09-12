@@ -1,5 +1,5 @@
 ====================================================
-  WELCOME TO MY (DESKOP OPTIMIZED FOR NOW) WEBSITE 
+                WELCOME TO MY WEBSITE 
 ====================================================
 
 Welcome, traveler. You have chosen — or perhaps been 
@@ -12,7 +12,7 @@ are here to stay or just passing through on your way
 to parts unknown... WELCOME.
 
 ╔═══════════════════════════════════════════════════╗
-║   ( ͡° ͜ʖ ͡°)            ABOUT ME         ( ͡° ͜ʖ ͡°)   ║
+║   ( ͡° ͜ʖ ͡°)          ABOUT ME           ( ͡° ͜ʖ ͡°)   ║
 ╚═══════════════════════════════════════════════════╝
 
 Hi! My name is Andrii Lenyshyn. I am a graduate 

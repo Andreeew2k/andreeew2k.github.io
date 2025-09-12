@@ -1,7 +1,7 @@
 ===PAGE===
 
 Project: Purchase - onboarding study
-Subject: [REDUCTED]
+Subject: [REDACTED]
 Status: Completed
 
 - Defined research scope and methodology with stakeholders
@@ -10,15 +10,15 @@ Status: Completed
 - Analyzed results with dscout, and synthesized findings into a comprehensive report
 - Presented findings and actionable recommendations
 
-Key findings: [REDUCTED]
-Recommendations: [REDUCTED]
+Key findings: [REDACTED]
+Recommendations: [REDACTED]
 
 UX tools: dscout, Figma, EnjoyHQ
 UX techniques: thematic analysis, affinity mapping, usability testing
 
 ===PAGE===
 
-Subject:  [REDUCTED]
+Subject:  [REDACTED]
 Project: FullStory audit of authentication flow
 Status: Completed
 
@@ -28,15 +28,15 @@ Status: Completed
 - Led analysis and insight generation to inform product decisions
 - Collaborated with multiple teams to address issues and propose a reimagined user flow
 
-Key findings:  [REDUCTED]
-Recommendations:  [REDUCTED]
+Key findings:  [REDACTED]
+Recommendations:  [REDACTED]
 
 UX tools: Fullstory
 
 ===PAGE===
 
 
-Subject:  [REDUCTED]
+Subject:  [REDACTED]
 Project: FullStory audit of authentication flow
 Status: Completed
 
@@ -46,15 +46,15 @@ Status: Completed
 - Clustered related usability issues to identify common causes
 - Delivered findings to senior stakeholders, including VPs
 
-Key findings:  [REDUCTED]
-Recommendations:  [REDUCTED]
+Key findings:  [REDACTED]
+Recommendations:  [REDACTED]
 
 UX tools: Fullstory
 
 ===PAGE===
 
 Project: Autorenewal Study
-Subject:  [REDUCTED]
+Subject:  [REDACTED]
 Status: Ongoing
 
 - Defined research scope and methodology with stakeholders
@@ -71,7 +71,7 @@ UX techniques: thematic analysis, affinity mapping, usability testing
 ===PAGE===
 
 Project: Intention investigation on Mobile
-Subject:  [REDUCTED]
+Subject:  [REDACTED]
 Status: Ongoing
 
 - Analyzed data from a year-long user questionnaire to uncover user needs

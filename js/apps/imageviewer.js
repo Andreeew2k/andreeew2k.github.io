@@ -3,11 +3,11 @@ document.addEventListener("DOMContentLoaded", () => {
   window.Apps = window.Apps || {};
 
   function openImageViewer(images = []) {
-    if (isMobile()){  
-      window.SoundFX?.error?.();  
-      imagesIcon.addEventListener("click", handler);
-      return; // No mobile support
-    }
+    // if (isMobile()){  
+    //   window.SoundFX?.error?.();  
+    //   imagesIcon.addEventListener("click", handler);
+    //   return; // No mobile support
+    // }
       
     const tpl = document.getElementById("imageviewer-template");
     if (!tpl) return console.error("❌ ImageViewer template missing");
@@ -15,36 +15,55 @@ document.addEventListener("DOMContentLoaded", () => {
     const win = tpl.content.firstElementChild.cloneNode(true);
     win.style.display = "block";
 
-    const margin = 20;
-    const defaultWidth = 800;
-    const defaultHeight = 600;
-    const maxWidth = window.innerWidth - margin * 2;
-    const maxHeight = window.innerHeight - margin * 2;
+    if (isMobile()) {
+      Object.assign(win.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        right: "0",
+        bottom: "0",
+        width: "100%",
+        height: "100%",
+        margin: "0",
+        border: "none",
+        borderRadius: "0",
+        zIndex: "9999",
+        display: "flex",
+        flexDirection: "column"
+      });
+    } else {
+       
+      const margin = 20;
+      const defaultWidth = 800;
+      const defaultHeight = 600;
+      const maxWidth = window.innerWidth - margin * 2;
+      const maxHeight = window.innerHeight - margin * 2;
 
-    // Constraints
-    win.style.minWidth = "400px";
-    win.style.minHeight = "300px";
-    win.style.maxWidth = maxWidth + "px";
-    win.style.maxHeight = maxHeight + "px";
+      // Constraints
+      win.style.minWidth = "400px";
+      win.style.minHeight = "300px";
+      win.style.maxWidth = maxWidth + "px";
+      win.style.maxHeight = maxHeight + "px";
 
-    // Initial size
-    win.style.width = Math.min(defaultWidth, maxWidth) + "px";
-    win.style.height = Math.min(defaultHeight, maxHeight) + "px";
+      // Initial size
+      win.style.width = Math.min(defaultWidth, maxWidth) + "px";
+      win.style.height = Math.min(defaultHeight, maxHeight) + "px";
 
-    // ✅ Safe spawn logic (right half of screen, clamped to viewport)
-    const winWidth = parseInt(win.style.width);
-    const winHeight = parseInt(win.style.height);
+      // ✅ Safe spawn logic (right half of screen, clamped to viewport)
+      const winWidth = parseInt(win.style.width);
+      const winHeight = parseInt(win.style.height);
 
-    const minLeft = Math.floor(window.innerWidth / 2);
-    const maxLeft = Math.max(minLeft, window.innerWidth - winWidth - margin);
-    const safeLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1) + minLeft);
+      const minLeft = Math.floor(window.innerWidth / 2);
+      const maxLeft = Math.max(minLeft, window.innerWidth - winWidth - margin);
+      const safeLeft = Math.floor(Math.random() * (maxLeft - minLeft + 1) + minLeft);
 
-    const minTop = margin;
-    const maxTop = Math.max(minTop, window.innerHeight - winHeight - margin);
-    const safeTop = Math.floor(Math.random() * (maxTop - minTop + 1) + minTop);
+      const minTop = margin;
+      const maxTop = Math.max(minTop, window.innerHeight - winHeight - margin);
+      const safeTop = Math.floor(Math.random() * (maxTop - minTop + 1) + minTop);
 
-    win.style.left = safeLeft + "px";
-    win.style.top = safeTop + "px";
+      win.style.left = safeLeft + "px";
+      win.style.top = safeTop + "px";
+    }
 
     // Add to DOM
     document.body.appendChild(win);
@@ -54,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // ----------------------------
     // Viewer logic
     // ----------------------------
-    let currentIndex = 0, rotation = 0, zoom = 1;
+        let currentIndex = 0, rotation = 0, zoom = 1;
     let slideshowInterval = null;
     const img = win.querySelector("img");
     const title = win.querySelector(".window-title");
@@ -68,29 +87,34 @@ document.addEventListener("DOMContentLoaded", () => {
       img.style.transform = `rotate(${rotation}deg) scale(${zoom})`;
     }
 
-    // Slideshow toggle
+    function startSlideshow() {
+      if (slideshowInterval) return; // already running
+      slideshowInterval = setInterval(() => {
+        currentIndex = (currentIndex + 1) % images.length;
+        rotation = 0; zoom = 1;
+        showImage(currentIndex);
+      }, 3000);
+      slideshowBtn.classList.add("active");
+    }
+
+    function stopSlideshow() {
+      if (!slideshowInterval) return;
+      clearInterval(slideshowInterval);
+      slideshowInterval = null;
+      slideshowBtn.classList.remove("active");
+    }
+
+    // ✅ Toggle slideshow safely
     slideshowBtn.addEventListener("click", () => {
       if (window.SoundFX) window.SoundFX.click?.();
-
-      if (slideshowInterval) {
-        // 🔴 Stop slideshow
-        clearInterval(slideshowInterval);
-        slideshowInterval = null;
-        slideshowBtn.classList.remove("active");
-      } else {
-        // 🟢 Start slideshow
-        slideshowInterval = setInterval(() => {
-          currentIndex = (currentIndex + 1) % images.length;
-          rotation = 0; zoom = 1;
-          showImage(currentIndex);
-        }, 3000);
-        slideshowBtn.classList.add("active");
-      }
+      if (slideshowInterval) stopSlideshow();
+      else startSlideshow();
     });
 
-    // Close button
+    // ✅ Close button also clears slideshow
     win.querySelector(".close-btn").addEventListener("click", () => {
       if (window.SoundFX) window.SoundFX.click?.();
+      stopSlideshow();
       win.remove();
     });
 
@@ -131,15 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (window.SoundFX) window.SoundFX.click?.();
       zoom = Math.max(0.1, zoom - 0.1);
       showImage(currentIndex);
-    });
-
-    win.querySelector(".slideshow").addEventListener("click", () => {
-      if (window.SoundFX) window.SoundFX.click?.();
-      setInterval(() => {
-        currentIndex = (currentIndex + 1) % images.length;
-        rotation = 0; zoom = 1;
-        showImage(currentIndex);
-      }, 3000);
     });
 
     // Show first image

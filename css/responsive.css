@@ -18,6 +18,16 @@
 
 /* === Mobile ≤ 768px === */
 @media (max-width: 768px) {
+    html, body {
+    overflow-x: hidden !important;   /* ✅ no sideways scroll */
+    max-width: 100vw !important;     /* ✅ clamp width to viewport */
+    height: 100vh !important;
+  }
+
+  body {
+    transform: rotate(0deg);         /* ✅ ensure portrait */
+    touch-action: pan-y;             /* ✅ allow only vertical scroll gestures */
+  }
   .window {
     position: fixed !important;
     top: 0 !important;
@@ -48,8 +58,8 @@
  .close-btn {
     width: 32px !important;
     height: 30px !important;
-    font-size: 20px !important;
+    font-size: 12px !important;
     line-height: 1 !important;   /* ✅ keeps X centered */
-    margin-left: 8px !important;
+    margin-left: 15px !important;
   }
 }
