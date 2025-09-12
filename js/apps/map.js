@@ -3,6 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
   window.Apps = window.Apps || {};
 
   function openTravelMap() {
+    if (window.SoundFX) { window.SoundFX.click?.();}
+
     const tpl = document.getElementById("travelmap-template");
     if (!tpl) return console.error("❌ TravelMap template missing");
 
@@ -266,8 +268,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Tab switching
     // ----------------------------
     win.querySelectorAll(".tab-btn").forEach(btn => {
-      if (window.SoundFX) window.SoundFX.click?.();
-
+      
       btn.addEventListener("click", () => {
         win.querySelectorAll(".tab-btn").forEach(b => b.classList.remove("active"));
         btn.classList.add("active");
@@ -306,7 +307,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const mapIcon = document.getElementById("map-icon");
   if (mapIcon) {
     const handler = () => {
-      if (window.SoundFX) { window.SoundFX.click?.();}
       openTravelMap();
     };
     if (isMobile()) mapIcon.addEventListener("click", handler);
