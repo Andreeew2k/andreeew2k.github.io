@@ -8,28 +8,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const win = tpl.content.firstElementChild.cloneNode(true);
     win.style.display = "flex";
-    
-    const margin = 20;
-    const defaultWidth = 700;
-    const defaultHeight = 500;
-    const maxWidth = window.innerWidth - margin * 2;
-    const maxHeight = window.innerHeight - margin * 2;
 
-    // Constraints
-    win.style.minWidth = "400px";
-    win.style.minHeight = "300px";
-    win.style.maxWidth = maxWidth + "px";
-    win.style.maxHeight = maxHeight + "px";
 
-    // Initial size
-    win.style.width = Math.min(defaultWidth, maxWidth) + "px";
-    win.style.height = Math.min(defaultHeight, maxHeight) + "px";
+    if (isMobile()) {
+      Object.assign(win.style, {
+        position: "fixed",
+        top: "0",
+        left: "0",
+        right: "0",
+        bottom: "0",
+        width: "100%",
+        height: "100%",
+        margin: "0",
+        border: "none",
+        borderRadius: "0",
+        zIndex: "9999",
+        display: "flex",
+        flexDirection: "column"
+      });
+    } else {
+       
+      const margin = 20;
+      const defaultWidth = 700;
+      const defaultHeight = 500;
+      const maxWidth = window.innerWidth - margin * 2;
+      const maxHeight = window.innerHeight - margin * 2;
 
-    // Randomized safe spawn
-    const safeLeft = Math.random() * (maxWidth - parseInt(win.style.width));
-    const safeTop = Math.random() * (maxHeight - parseInt(win.style.height));
-    win.style.left = safeLeft + margin + "px";
-    win.style.top = safeTop + margin + "px";
+      // Constraints
+      win.style.minWidth = "400px";
+      win.style.minHeight = "300px";
+      win.style.maxWidth = maxWidth + "px";
+      win.style.maxHeight = maxHeight + "px";
+
+      // Initial size
+      win.style.width = Math.min(defaultWidth, maxWidth) + "px";
+      win.style.height = Math.min(defaultHeight, maxHeight) + "px";
+      const safeLeft = Math.random() * (maxWidth - parseInt(win.style.width));
+      const safeTop = Math.random() * (maxHeight - parseInt(win.style.height));
+      win.style.left = safeLeft + margin + "px";
+      win.style.top = safeTop + margin + "px";
+    }
 
     // Close button
     win.querySelector(".close-btn").addEventListener("click", () => win.remove());

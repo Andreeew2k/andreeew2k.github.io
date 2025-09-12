@@ -2,10 +2,17 @@
 document.addEventListener("DOMContentLoaded", () => {
   window.Apps = window.Apps || {};
 
+  // ✅ Detect mobile
+  function isMobile() {
+    return (
+      /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      window.innerWidth <= 1024
+    );
+  }
+
   function openExe() {
     const tpl = document.getElementById("exe-template");
     if (!tpl) return console.error("❌ Exe template missing");
-
 
     // Prevent multiple windows
     let existing = document.querySelector(".exe-window");
@@ -18,35 +25,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const win = tpl.content.firstElementChild.cloneNode(true);
     win.style.display = "flex";
 
-    // Desktop margins
+    // Desktop defaults
     const margin = 20;
     const defaultWidth = 500;
     const defaultHeight = 500;
     const maxWidth = window.innerWidth - margin * 2;
     const maxHeight = window.innerHeight - margin * 2;
 
-    // Constraints
-    win.style.minWidth = "300px";
-    win.style.maxWidth = maxWidth + "px";
-    win.style.maxHeight = maxHeight + "px";
-
-    // Height based on lines
-    const bodyEl = win.querySelector(".exe-body");
-    const lineHeight = parseFloat(getComputedStyle(bodyEl).lineHeight || 18);
-    const minHeight = lineHeight * 32 + 120; // header + prompt
-    win.style.minHeight = Math.min(minHeight, maxHeight) + "px";
-
-    // Initial size
-    win.style.width = Math.min(defaultWidth, maxWidth) + "px";
-    win.style.height = Math.min(defaultHeight, maxHeight) + "px";
-
-    // Randomized safe spawn (left half of screen)
-    const safeLeft = Math.random() * (maxWidth / 2 - parseInt(win.style.width));
-    const safeTop = Math.random() * (maxHeight - parseInt(win.style.height));
-    win.style.left = safeLeft + margin + "px";
-    win.style.top = safeTop + margin + "px";
-
-    // Header text (ASCII art + info)
+    // Header text (desktop vs mobile)
     const headerEl = win.querySelector(".exe-header");
     const promptEl = win.querySelector(".exe-prompt");
     const headerText = `
@@ -74,7 +60,6 @@ Domain................................................................ Software 
  █ ▀▀ █ █      █▄▄█   █   █▀▀▀▀ █▀▀▀▀ 
  █    █ ▀█▄▄▀ █    █  █   ▀█▄▄▀ ▀█▄▄▀ 
                                       
-                                      
  ======================================
  Location.............. Remote, Toronto
  Position................ UX Researcher
@@ -82,23 +67,11 @@ Domain................................................................ Software 
  Details............ Confidential (NDA)
  Domain.............. Software Security
  ======================================
- `;
+`;
 
-    headerEl.textContent = headerMobileText;
-
-    // Measure header width and adjust minWidth
-    const tempSpan = document.createElement("span");
-    tempSpan.style.visibility = "hidden";
-    tempSpan.style.position = "absolute";
-    tempSpan.style.whiteSpace = "pre";
-    tempSpan.style.fontFamily = getComputedStyle(headerEl).fontFamily;
-    tempSpan.style.fontSize = getComputedStyle(headerEl).fontSize;
-    tempSpan.textContent = headerText;
-    document.body.appendChild(tempSpan);
-    const headerWidth = tempSpan.getBoundingClientRect().width;
-    tempSpan.remove();
+    // ✅ Apply sizing logic
     if (isMobile()) {
-      // === Mobile → force fullscreen ===
+      // Mobile → force fullscreen
       Object.assign(win.style, {
         position: "fixed",
         top: "0",
@@ -114,18 +87,61 @@ Domain................................................................ Software 
         display: "flex",
         flexDirection: "column"
       });
-    }
-    const headerMinWidth = Math.min(headerWidth + 40, maxWidth);
-    win.style.minWidth = headerMinWidth + "px";
-    if (parseInt(win.style.width) < headerMinWidth) {
-      win.style.width = headerMinWidth + "px";
+
+      // Use mobile header
+      headerEl.textContent = headerMobileText;
+    } else {
+      // Desktop constraints
+      win.style.minWidth = "300px";
+      win.style.maxWidth = maxWidth + "px";
+      win.style.maxHeight = maxHeight + "px";
+
+      // Height based on lines
+      const bodyEl = win.querySelector(".exe-body");
+      const lineHeight = parseFloat(getComputedStyle(bodyEl).lineHeight || 18);
+      const minHeight = lineHeight * 32 + 120; // header + prompt
+      win.style.minHeight = Math.min(minHeight, maxHeight) + "px";
+
+      // Initial size
+      win.style.width = Math.min(defaultWidth, maxWidth) + "px";
+      win.style.height = Math.min(defaultHeight, maxHeight) + "px";
+
+      // Randomized safe spawn (left half of screen)
+      const safeLeft =
+        Math.random() * (maxWidth / 2 - parseInt(win.style.width));
+      const safeTop = Math.random() * (maxHeight - parseInt(win.style.height));
+      win.style.left = safeLeft + margin + "px";
+      win.style.top = safeTop + margin + "px";
+
+      // Use desktop header
+      headerEl.textContent = headerText;
+
+      // Adjust width based on header content
+      const tempSpan = document.createElement("span");
+      tempSpan.style.visibility = "hidden";
+      tempSpan.style.position = "absolute";
+      tempSpan.style.whiteSpace = "pre";
+      tempSpan.style.fontFamily = getComputedStyle(headerEl).fontFamily;
+      tempSpan.style.fontSize = getComputedStyle(headerEl).fontSize;
+      tempSpan.textContent = headerText;
+      document.body.appendChild(tempSpan);
+      const headerWidth = tempSpan.getBoundingClientRect().width;
+      tempSpan.remove();
+
+      const headerMinWidth = Math.min(headerWidth + 40, maxWidth);
+      win.style.minWidth = headerMinWidth + "px";
+      if (parseInt(win.style.width) < headerMinWidth) {
+        win.style.width = headerMinWidth + "px";
+      }
     }
 
     // Body typing effect
+    const bodyEl = win.querySelector(".exe-body");
     fetch("mcafee_projects.txt")
       .then(res => res.text())
       .then(fileText => {
-        const pages = fileText.split("===PAGE===")
+        const pages = fileText
+          .split("===PAGE===")
           .map(p => p.trim())
           .filter(p => p.length > 0);
 
@@ -149,6 +165,12 @@ Domain................................................................ Software 
             if (i < text.length) {
               bodyEl.textContent += text.charAt(i);
               i++;
+
+              // ✅ Mobile auto-scroll
+              if (isMobile()) {
+                bodyEl.scrollTop = bodyEl.scrollHeight;
+              }
+
               setTimeout(step, 15);
             } else {
               typing = false;
@@ -164,11 +186,15 @@ Domain................................................................ Software 
             return;
           }
           if (pageIndex < pages.length) {
+            // Reset scroll to top before new page
+            bodyEl.scrollTop = 0;
             bodyEl.classList.add("fade-out");
             setTimeout(() => {
               bodyEl.classList.remove("fade-out");
               typeWriter(pages[pageIndex], () => {
-                promptEl.textContent = "Press Enter/Click to Continue";
+                // Show prompt with blinking cursor
+                promptEl.innerHTML =
+                  'Press Enter/Click to Continue <span class="blinker">█</span>';
                 promptEl.style.display = "block";
               });
               pageIndex++;
@@ -176,13 +202,15 @@ Domain................................................................ Software 
             promptEl.style.display = "none";
           } else {
             bodyEl.textContent = "";
-            promptEl.textContent = "End of Report — Press Enter/Click to Start Over";
+            promptEl.innerHTML =
+              'End of Report — Press Enter/Click to Start Over <span class="blinker">█</span>';
             pageIndex = 0;
           }
         }
 
         promptEl.style.display = "block";
-        promptEl.textContent = "Press Enter/Click to Continue";
+        promptEl.innerHTML =
+          'Press Enter/Click to Continue <span class="blinker">█</span>';
 
         // Triggers
         win.addEventListener("click", e => {
@@ -201,10 +229,12 @@ Domain................................................................ Software 
     // Close button
     win.querySelector(".close-btn").addEventListener("click", () => win.remove());
 
-    // Add to DOM + make draggable
+    // Add to DOM + make draggable (desktop only)
     document.body.appendChild(win);
-    makeDraggable(win);
-    bringToFront(win);
+    if (!isMobile()) {
+      makeDraggable(win);
+      bringToFront(win);
+    }
 
     console.log("✅ Exe window opened");
   }
@@ -216,7 +246,9 @@ Domain................................................................ Software 
   const exeIcon = document.getElementById("exe-icon");
   if (exeIcon) {
     const handler = () => {
-      if (window.SoundFX) { window.SoundFX.click?.(); }
+      if (window.SoundFX) {
+        window.SoundFX.click?.();
+      }
       openExe();
     };
     if (isMobile()) exeIcon.addEventListener("click", handler);

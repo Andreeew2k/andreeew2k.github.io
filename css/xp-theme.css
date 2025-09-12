@@ -128,14 +128,15 @@
   margin-bottom: 10px;
 }
 .exe-body {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;   /* ✅ allow scrolling */
+  font-size: 16px;
+  line-height: 18px;
   white-space: pre-wrap;
 }
-.exe-prompt {
-  text-align: left;
-  color: #0f0;
-  margin-top: 10px;
-  font-size: 16px;
-}
+
+/* ✅ working blinker */
 .blinker {
   display: inline-block;
   animation: blink 1s step-start infinite;
@@ -143,6 +144,14 @@
 @keyframes blink {
   50% { opacity: 0; }
 }
+
+.exe-prompt {
+  text-align: left;
+  color: #0f0;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
 
 /* === Travel Map === */
 .travelmap-window {
