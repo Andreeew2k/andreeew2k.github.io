@@ -221,9 +221,13 @@
     <script src="js/apps/minesweeper.js"></script>
 
     <script>
-      // Prevent touch scrolling / bounce on mobile
+      // Prevent background scrolling, but allow scroll inside window content
       document.addEventListener('touchmove', function (e) {
-        e.preventDefault();
+        // If the target is inside a scrollable app content, allow it
+        if (e.target.closest('.notepad-content, .exe-body, .image-content, .music-content, .map-container')) {
+          return; // ✅ let it scroll
+        }
+        e.preventDefault(); // 🚫 block background scroll
       }, { passive: false });
     </script>
 
