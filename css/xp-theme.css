@@ -232,3 +232,60 @@
 #orientation-overlay {
   display: none;
 }
+/* === Error/Notification Popup === */
+.notify-window {
+  width: 320px !important;
+  max-width: 320px !important;
+  height: auto !important;   /* let height grow with content */
+  min-height: 150px;         /* small default height */  background: #ece9d8;
+  font-family: Tahoma, sans-serif;
+  font-size: 14px;
+  color: black;
+  position: absolute;        /* ✅ draggable */
+  z-index: 100000;
+  box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #000080;
+}
+
+.notify-content {
+  padding: 16px;
+}
+
+.notify-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.notify-icon {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.notify-body p {
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.notify-actions {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.notify-actions button {
+  min-width: 80px;
+  background: #d4d0c8;
+  border: 1px solid #808080;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-family: Tahoma, sans-serif;
+  font-size: 13px;
+}
+
+.notify-actions button:hover {
+  background: #e0e0e0;
+}

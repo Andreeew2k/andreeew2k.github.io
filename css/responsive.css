@@ -1,14 +1,13 @@
 /* Medium desktops ≤ 1400px */
 @media (max-width: 1400px) {
-  .window:not([style*="position: fixed"]) {
+  .window:not([style*="position: fixed"]):not(.notify-window) {
     max-width: 95vw;
     max-height: 90vh;
   }
 }
 
-/* Small laptops ≤ 1024px */
 @media (max-width: 1024px) {
-  .window:not([style*="position: fixed"]) {
+  .window:not([style*="position: fixed"]):not(.notify-window) {
     width: 85vw !important;
     height: 75vh !important;
     top: 10vh !important;
@@ -49,7 +48,7 @@
     touch-action: pan-y;             /* ✅ vertical gestures only */
   }
 
-  .window {
+  .window:not(.notify-window) {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;

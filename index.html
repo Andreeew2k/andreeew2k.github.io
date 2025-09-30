@@ -168,6 +168,30 @@
       </div>
     </div>
   </template>
+  <!-- Error/Notification popup template -->
+<!-- Error/Notification popup template -->
+<template id="notify-template">
+  <div class="window notify-window">
+    <div class="title-bar">
+      <span class="window-title">Warning</span>
+      <button class="close-btn">X</button>
+    </div>
+    <div class="notify-content">
+      <div class="notify-body">
+        <img class="notify-icon" src="icons/error.png" alt="Error">
+        <p id="notify-message">
+          My current work contract expires in 
+          <span class="contract-counter"></span>! <br><br>
+          If you stumble upon something cool, feel free to <a href="mailto:andrii.lenyshyn@gmail.com?subject=Found something fun!">drop me a line</a>.
+        </p>
+      </div>
+      <div class="notify-actions">
+        <button class="notify-close">OK</button>
+      </div>
+    </div>
+  </div>
+</template>
+
 
   <!-- Image Viewer template -->
   <template id="imageviewer-template">
@@ -207,6 +231,9 @@
   <script src="js/apps/music.js"></script>
   <script src="js/apps/map.js"></script>
   <script src="js/apps/minesweeper.js"></script>
+  <script src="js/apps/notification.js"></script>
+
+
 
   <script>
     // ✅ Prevent background scrolling, allow scroll inside windows
