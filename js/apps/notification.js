@@ -71,5 +71,5 @@ if (typeof bringToFront === "function") bringToFront(win);
 }
 
 // Spawn notification after ~1 min – 1m10s
-setTimeout(spawnNotification, Math.floor(Math.random() * 10000) + 10);
+setTimeout(spawnNotification, Math.floor(Math.random() * 10000) + 30000);
 
