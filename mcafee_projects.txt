@@ -83,22 +83,28 @@ UX techniques: data analysis, thematic analysis
 
 ===PAGE===
 
-Project: Summary Report Study 
-Subject:  [REDACTED]
+Project: Summary Report Study
+Subject: [REDACTED]
 Status: Completed
 
-- 
+- Evaluated redesigned report structure for usability and clarity.
+- Reviewed user feedback to identify flow and content issues.
+- Conducted mixed-method research and analyzed key findings.
+- Delivered insights that guided improvements to report design.
 
-UX tools: Dscout, Lyssna, R studio
-UX techniques: data analysis, thematic analysis
+UX Tools: Dscout, Lyssna, R Studio
+UX Techniques: Data analysis, thematic analysis
 
 ===PAGE===
 
-Project: New feature integration Study 
-Subject:  [REDACTED]
+Project: Feature [REDACTED] Integration
+Subject: [REDACTED]
 Status: Completed
 
-- 
+- Explored product opportunities for integrating a new feature.
+- Defined research goals, scope, and success metrics.
+- Conducted studies to assess user understanding and fit.
+- Provided insights that informed integration feasibility.
 
-UX tools: Dscout, Lyssna, R studio
-UX techniques: data analysis, thematic analysis
+UX Tools: Dscout, Lyssna, R Studio
+UX Techniques: Data analysis, thematic analysis
