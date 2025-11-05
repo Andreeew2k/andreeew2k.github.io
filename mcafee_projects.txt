@@ -81,3 +81,24 @@ Status: Completed
 UX tools: Lyssna, R studio
 UX techniques: data analysis, thematic analysis
 
+===PAGE===
+
+Project: Summary Report Study 
+Subject:  [REDACTED]
+Status: Completed
+
+- 
+
+UX tools: Dscout, Lyssna, R studio
+UX techniques: data analysis, thematic analysis
+
+===PAGE===
+
+Project: New feature integration Study 
+Subject:  [REDACTED]
+Status: Completed
+
+- 
+
+UX tools: Dscout, Lyssna, R studio
+UX techniques: data analysis, thematic analysis
