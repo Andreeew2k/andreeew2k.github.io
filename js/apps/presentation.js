@@ -34,12 +34,18 @@ document.addEventListener("DOMContentLoaded", () => {
     const bodyEl = win.querySelector(".presentation-body");
     const statusEl = win.querySelector(".presentation-status");
     const prevBtn = win.querySelector(".presentation-prev");
-    const enterBtn = win.querySelector(".presentation-enter");
+    const fullscreenBtn = win.querySelector(".presentation-fullscreen");
     const exitBtn = win.querySelector(".presentation-exit");
     const nextBtn = win.querySelector(".presentation-next");
+    const bootOverlay = win.querySelector(".presentation-boot");
+    const pinOverlay = win.querySelector(".presentation-pin");
+    const pinInput = win.querySelector(".presentation-pin-input");
+    const pinSubmit = win.querySelector(".presentation-pin-submit");
+    const pinMessage = win.querySelector(".presentation-pin-message");
 
     let slides = [];
     let slideIndex = 0;
+    let isLocked = true;
 
     function renderSlide() {
       const slide = slides[slideIndex];
@@ -75,8 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateFullscreenButtons() {
       const full = isFullscreen();
-      enterBtn.disabled = full;
-      exitBtn.disabled = !full;
+      fullscreenBtn.textContent = full ? "Fullscreen On" : "Fullscreen Off";
     }
 
     function triggerCrt(mode) {
@@ -104,6 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function nextSlide() {
+      if (isLocked) return;
       if (slideIndex < slides.length - 1) {
         slideIndex += 1;
         renderSlide();
@@ -111,9 +117,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function prevSlide() {
+      if (isLocked) return;
       if (slideIndex > 0) {
         slideIndex -= 1;
         renderSlide();
+      }
+    }
+
+    function showPinMessage(message) {
+      pinMessage.textContent = message;
+    }
+
+    function unlockDeck() {
+      isLocked = false;
+      win.classList.remove("presentation-locked");
+      pinOverlay.classList.add("hidden");
+      showPinMessage("");
+      renderSlide();
+    }
+
+    function handlePinSubmit() {
+      if (pinInput.value === "1337") {
+        unlockDeck();
+      } else {
+        showPinMessage("Access denied");
+        pinInput.value = "";
+        pinInput.focus();
       }
     }
 
@@ -122,14 +151,21 @@ document.addEventListener("DOMContentLoaded", () => {
       prevSlide();
     });
 
-    enterBtn.addEventListener("click", e => {
+    fullscreenBtn.addEventListener("click", e => {
       e.stopPropagation();
-      requestFullscreen();
+      if (isFullscreen()) {
+        exitFullscreen();
+      } else {
+        requestFullscreen();
+      }
     });
 
     exitBtn.addEventListener("click", e => {
       e.stopPropagation();
-      exitFullscreen();
+      if (isFullscreen()) {
+        exitFullscreen();
+      }
+      closeWindow();
     });
 
     nextBtn.addEventListener("click", e => {
@@ -138,13 +174,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     win.addEventListener("click", e => {
-      if (e.target.closest(".title-bar") || e.target.closest(".presentation-controls")) {
+      if (e.target.closest(".presentation-controls")) {
         return;
       }
       nextSlide();
     });
 
     function handleKeydown(e) {
+      if (isLocked && e.key === "Enter") {
+        handlePinSubmit();
+        return;
+      }
+      if (isLocked) return;
       if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") {
         nextSlide();
       }
@@ -153,17 +194,24 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       if (e.key === "f" || e.key === "F11") {
         e.preventDefault();
-        requestFullscreen();
+        if (isFullscreen()) {
+          exitFullscreen();
+        } else {
+          requestFullscreen();
+        }
       }
       if (e.key === "Escape") {
-        exitFullscreen();
+        if (isFullscreen()) {
+          exitFullscreen();
+        }
+        closeWindow();
       }
     }
 
     document.addEventListener("keydown", handleKeydown);
     document.addEventListener("fullscreenchange", updateFullscreenButtons);
 
-    win.querySelector(".close-btn").addEventListener("click", () => {
+    function closeWindow() {
       if (window.SoundFX) window.SoundFX.click?.();
       document.removeEventListener("fullscreenchange", updateFullscreenButtons);
       document.removeEventListener("keydown", handleKeydown);
@@ -171,12 +219,27 @@ document.addEventListener("DOMContentLoaded", () => {
         document.exitFullscreen().catch(err => console.warn(err));
       }
       win.remove();
+    }
+
+    pinSubmit.addEventListener("click", handlePinSubmit);
+    pinInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") handlePinSubmit();
     });
 
     document.body.appendChild(win);
     bringToFront(win);
-    triggerCrt("on");
     updateFullscreenButtons();
+    win.classList.add("presentation-locked");
+    pinOverlay.classList.add("hidden");
+    pinInput.value = "";
+    showPinMessage("");
+    bootOverlay.classList.remove("hidden");
+    setTimeout(() => {
+      triggerCrt("on");
+      bootOverlay.classList.add("hidden");
+      pinOverlay.classList.remove("hidden");
+      pinInput.focus();
+    }, 600);
 
     fetch("presentation/slides.json")
       .then(res => {
@@ -188,7 +251,6 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!slides.length) {
           throw new Error("No slides found");
         }
-        renderSlide();
       })
       .catch(err => {
         titleEl.textContent = "Unable to load presentation";

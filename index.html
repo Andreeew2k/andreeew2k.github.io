@@ -97,11 +97,19 @@
   <!-- Presentation window template -->
   <template id="presentation-template">
     <div class="window presentation-window">
-      <div class="title-bar">
-        <span class="window-title">Presentation</span>
-        <button class="close-btn">X</button>
-      </div>
       <div class="presentation-content">
+        <div class="presentation-overlay presentation-boot">
+          <div class="presentation-boot-text">Initializing...</div>
+        </div>
+        <div class="presentation-overlay presentation-pin">
+          <div class="presentation-pin-card">
+            <div class="presentation-pin-title">Vault Access</div>
+            <p>Enter PIN to continue</p>
+            <input class="presentation-pin-input" type="password" inputmode="numeric" maxlength="4" />
+            <button class="presentation-pin-submit" type="button">Unlock</button>
+            <div class="presentation-pin-message"></div>
+          </div>
+        </div>
         <div class="presentation-slide">
           <h1 class="presentation-title"></h1>
           <h2 class="presentation-subtitle"></h2>
@@ -109,8 +117,8 @@
         </div>
         <div class="presentation-controls">
           <button class="presentation-prev" type="button">◀ Prev</button>
-          <button class="presentation-enter" type="button">⬆ Fullscreen</button>
-          <button class="presentation-exit" type="button">⬇ Exit</button>
+          <button class="presentation-fullscreen" type="button">Fullscreen Off</button>
+          <button class="presentation-exit" type="button">Exit</button>
           <button class="presentation-next" type="button">Next ▶</button>
         </div>
         <div class="presentation-status"></div>
