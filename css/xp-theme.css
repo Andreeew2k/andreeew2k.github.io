@@ -155,6 +155,72 @@
   font-size: 16px;
 }
 
+/* === Presentation === */
+.presentation-window {
+  background: #0b0f1a;
+  color: #f5f6fa;
+  font-family: "Tahoma", sans-serif;
+  display: flex;
+  flex-direction: column;
+  resize: none;
+}
+.presentation-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 32px 40px 24px;
+  gap: 24px;
+  overflow: hidden;
+}
+.presentation-slide {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+}
+.presentation-title {
+  font-size: 48px;
+  margin: 0;
+}
+.presentation-subtitle {
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0;
+  color: #b5c0ff;
+}
+.presentation-body {
+  font-size: 22px;
+  line-height: 1.5;
+}
+.presentation-body ul {
+  margin: 0;
+  padding-left: 28px;
+}
+.presentation-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 16px;
+}
+.presentation-controls button {
+  background: #1f2a44;
+  color: #f5f6fa;
+  border: 1px solid #4a5a7a;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.presentation-controls button:hover {
+  background: #2a3a5c;
+}
+.presentation-status {
+  flex: 1;
+  text-align: center;
+  color: #b0bdd6;
+}
+
 
 /* === Travel Map === */
 .travelmap-window {
