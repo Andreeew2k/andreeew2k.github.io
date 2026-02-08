@@ -34,6 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const bodyEl = win.querySelector(".presentation-body");
     const statusEl = win.querySelector(".presentation-status");
     const prevBtn = win.querySelector(".presentation-prev");
+    const enterBtn = win.querySelector(".presentation-enter");
+    const exitBtn = win.querySelector(".presentation-exit");
     const nextBtn = win.querySelector(".presentation-next");
 
     let slides = [];
@@ -67,6 +69,40 @@ document.addEventListener("DOMContentLoaded", () => {
       nextBtn.disabled = slideIndex === slides.length - 1;
     }
 
+    function isFullscreen() {
+      return document.fullscreenElement === win;
+    }
+
+    function updateFullscreenButtons() {
+      const full = isFullscreen();
+      enterBtn.disabled = full;
+      exitBtn.disabled = !full;
+    }
+
+    function triggerCrt(mode) {
+      const className = mode === "off" ? "crt-off" : "crt-on";
+      win.classList.remove("crt-on", "crt-off");
+      void win.offsetWidth;
+      win.classList.add(className);
+      setTimeout(() => win.classList.remove(className), 700);
+    }
+
+    function requestFullscreen() {
+      if (isFullscreen()) return;
+      if (win.requestFullscreen) {
+        triggerCrt("on");
+        win.requestFullscreen().catch(err => console.warn(err));
+      }
+    }
+
+    function exitFullscreen() {
+      if (!isFullscreen()) return;
+      if (document.exitFullscreen) {
+        triggerCrt("off");
+        document.exitFullscreen().catch(err => console.warn(err));
+      }
+    }
+
     function nextSlide() {
       if (slideIndex < slides.length - 1) {
         slideIndex += 1;
@@ -84,6 +120,16 @@ document.addEventListener("DOMContentLoaded", () => {
     prevBtn.addEventListener("click", e => {
       e.stopPropagation();
       prevSlide();
+    });
+
+    enterBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      requestFullscreen();
+    });
+
+    exitBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      exitFullscreen();
     });
 
     nextBtn.addEventListener("click", e => {
@@ -105,18 +151,32 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "ArrowLeft" || e.key === "PageUp") {
         prevSlide();
       }
+      if (e.key === "f" || e.key === "F11") {
+        e.preventDefault();
+        requestFullscreen();
+      }
+      if (e.key === "Escape") {
+        exitFullscreen();
+      }
     }
 
     document.addEventListener("keydown", handleKeydown);
+    document.addEventListener("fullscreenchange", updateFullscreenButtons);
 
     win.querySelector(".close-btn").addEventListener("click", () => {
       if (window.SoundFX) window.SoundFX.click?.();
+      document.removeEventListener("fullscreenchange", updateFullscreenButtons);
       document.removeEventListener("keydown", handleKeydown);
+      if (isFullscreen()) {
+        document.exitFullscreen().catch(err => console.warn(err));
+      }
       win.remove();
     });
 
     document.body.appendChild(win);
     bringToFront(win);
+    triggerCrt("on");
+    updateFullscreenButtons();
 
     fetch("presentation/slides.json")
       .then(res => {
