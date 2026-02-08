@@ -44,6 +44,11 @@
       <span>Industry Projects.exe</span>
     </div>
 
+    <div class="icon" id="presentation-icon">
+      <img src="icons/folder_files.png" alt="Presentation">
+      <span>Presentation.ppt</span>
+    </div>
+
   </div>
 
   <!-- Right side column -->
@@ -84,6 +89,28 @@
         <div class="exe-prompt">
           <span>Press <b>Enter</b> or <b>Click</b> to continue </span>
           <span class="blinker">█</span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Presentation window template -->
+  <template id="presentation-template">
+    <div class="window presentation-window">
+      <div class="title-bar">
+        <span class="window-title">Presentation</span>
+        <button class="close-btn">X</button>
+      </div>
+      <div class="presentation-content">
+        <div class="presentation-slide">
+          <h1 class="presentation-title"></h1>
+          <h2 class="presentation-subtitle"></h2>
+          <div class="presentation-body"></div>
+        </div>
+        <div class="presentation-controls">
+          <button class="presentation-prev">◀ Prev</button>
+          <div class="presentation-status"></div>
+          <button class="presentation-next">Next ▶</button>
         </div>
       </div>
     </div>
@@ -231,6 +258,7 @@
   <script src="js/apps/music.js"></script>
   <script src="js/apps/map.js"></script>
   <script src="js/apps/minesweeper.js"></script>
+  <script src="js/apps/presentation.js"></script>
   <script src="js/apps/notification.js"></script>
 
 
