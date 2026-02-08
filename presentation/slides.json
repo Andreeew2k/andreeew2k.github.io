@@ -1,0 +1,31 @@
+{
+  "title": "Portfolio Presentation",
+  "slides": [
+    {
+      "title": "UX Research Highlights",
+      "subtitle": "Andrii Lenyshyn",
+      "body": "A quick walkthrough of recent UX research work, methods, and outcomes."
+    },
+    {
+      "title": "What I Do",
+      "bullets": [
+        "Plan and run usability studies",
+        "Prototype and validate interaction ideas",
+        "Synthesize insights into product decisions"
+      ]
+    },
+    {
+      "title": "Recent Focus",
+      "bullets": [
+        "Software security workflows",
+        "Cross-functional collaboration",
+        "Evidence-based UX strategy"
+      ]
+    },
+    {
+      "title": "Thanks",
+      "subtitle": "Questions?",
+      "body": "Reach out for full case studies and artifacts."
+    }
+  ]
+}

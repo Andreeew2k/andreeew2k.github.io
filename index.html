@@ -44,6 +44,11 @@
       <span>Industry Projects.exe</span>
     </div>
 
+    <div class="icon" id="presentation-icon">
+      <img src="icons/folder_files.png" alt="Presentation">
+      <span>Presentation.ppt</span>
+    </div>
+
   </div>
 
   <!-- Right side column -->
@@ -85,6 +90,38 @@
           <span>Press <b>Enter</b> or <b>Click</b> to continue </span>
           <span class="blinker">█</span>
         </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- Presentation window template -->
+  <template id="presentation-template">
+    <div class="window presentation-window">
+      <div class="presentation-content">
+        <div class="presentation-overlay presentation-boot">
+          <div class="presentation-boot-text">Initializing...</div>
+        </div>
+        <div class="presentation-overlay presentation-pin">
+          <div class="presentation-pin-card">
+            <div class="presentation-pin-title">Vault Access</div>
+            <p>Enter PIN to continue</p>
+            <input class="presentation-pin-input" type="password" inputmode="numeric" maxlength="4" />
+            <button class="presentation-pin-submit" type="button">Unlock</button>
+            <div class="presentation-pin-message"></div>
+          </div>
+        </div>
+        <div class="presentation-slide">
+          <h1 class="presentation-title"></h1>
+          <h2 class="presentation-subtitle"></h2>
+          <div class="presentation-body"></div>
+        </div>
+        <div class="presentation-controls">
+          <button class="presentation-prev" type="button">◀ Prev</button>
+          <button class="presentation-fullscreen" type="button">Fullscreen Off</button>
+          <button class="presentation-exit" type="button">Exit</button>
+          <button class="presentation-next" type="button">Next ▶</button>
+        </div>
+        <div class="presentation-status"></div>
       </div>
     </div>
   </template>
@@ -231,6 +268,7 @@
   <script src="js/apps/music.js"></script>
   <script src="js/apps/map.js"></script>
   <script src="js/apps/minesweeper.js"></script>
+  <script src="js/apps/presentation.js"></script>
   <script src="js/apps/notification.js"></script>
 
 
