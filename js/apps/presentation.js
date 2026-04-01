@@ -265,11 +265,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const icon = document.getElementById("presentation-icon");
   if (icon) {
+    const presentationUrl = "https://1drv.ms/p/c/3926b3560b2a381a/IQAmtWvVGz7sRKaNNF58NEd4AeStj9VbcJJ4uj7_Y3hlt3w?e=1KgzhB";
     const handler = () => {
       if (window.SoundFX) {
         window.SoundFX.click?.();
       }
-      openPresentation();
+      window.open(presentationUrl, "_blank", "noopener,noreferrer");
     };
     if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
       icon.addEventListener("click", handler);
